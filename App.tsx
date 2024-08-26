@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeDD from './app/screens/DriverDetails/HomeDD';
+import AddDriverDetails from './app/screens/DriverDetails/AddDriverDetails';
+import DDList from './app/screens/DriverDetails/DDList';
+import SignUpScreen from './app/screens/SignUp';
+import Signinscreen from './app/screens/LogIn';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Signinscreen">
+        <Stack.Screen name="HomeDD" component={HomeDD} />
+        <Stack.Screen name="AddDriverDetails" component={AddDriverDetails} />
+        <Stack.Screen name="DDList" component={DDList} />
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="Signinscreen" component={Signinscreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
