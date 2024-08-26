@@ -13,11 +13,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Signinscreen">
-        <Stack.Screen name="HomeDD" component={HomeDD} />
-        <Stack.Screen name="AddDriverDetails" component={AddDriverDetails} />
-        <Stack.Screen name="DDList" component={DDList} />
-        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="Signinscreen" component={Signinscreen} />
+        <Stack.Screen name="HomeDD" component={HomeDD} options={{headerShown:false}}/>
+        <Stack.Screen name="AddDriverDetails" component={AddDriverDetails} options={{headerShown:false}} />
+        <Stack.Screen name="DDList" component={DDList} options={{headerShown:false}} />
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Signinscreen" component={Signinscreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
