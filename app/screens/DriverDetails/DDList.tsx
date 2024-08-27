@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet ,SafeAreaView} from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs } from 'firebase/firestore';
+import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
 
-// Define the type for the driver details
+
 interface DriverDetail {
   id: string;
   vehicleNumber: string;
@@ -45,12 +47,18 @@ const DDList: React.FC = () => {
   );
 
   return (
+    <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
+        <Header/>
+      <View style={{ flex: 1, margin: 20 }} >
     <FlatList
       data={driverDetails}
       renderItem={renderItem}
       keyExtractor={item => item.id}
       contentContainerStyle={styles.listContainer}
     />
+    </View>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 

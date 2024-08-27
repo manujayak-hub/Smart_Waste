@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, TextInput, Button ,SafeAreaView} from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
+
 
 interface DriverDetail {
   id: string;
@@ -67,7 +70,7 @@ const UpdateDeleteDD: React.FC = () => {
       <Text style={styles.itemText}>Arrival Date: {item.arrivalDate}</Text>
       <Text style={styles.itemText}>Leaving Date: {item.leavingDate}</Text>
 
-      {/* Update and Delete Buttons */}
+      
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -87,6 +90,9 @@ const UpdateDeleteDD: React.FC = () => {
   );
 
   return (
+    <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
+        <Header/>
+      <View style={{ flex: 1, margin: 20 }} >
     <View style={styles.listContainer}>
       <FlatList
         data={driverDetails}
@@ -94,7 +100,7 @@ const UpdateDeleteDD: React.FC = () => {
         keyExtractor={item => item.id}
       />
 
-      {/* Update Modal */}
+      
       {modalVisible && updatedDetail && (
         <Modal
           visible={modalVisible}
@@ -156,6 +162,9 @@ const UpdateDeleteDD: React.FC = () => {
         </Modal>
       )}
     </View>
+    </View>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 

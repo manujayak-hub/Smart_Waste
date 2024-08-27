@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import {  TextInput, Button, StyleSheet, ScrollView } from 'react-native';
+import { Text, TextInput, Button, StyleSheet, ScrollView,SafeAreaView,View } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { addDoc, collection } from 'firebase/firestore';
+import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
+
 
 const AddDriverDetails = () => {
   const [vehicleNumber, setVehicleNumber] = useState('');
@@ -51,7 +54,13 @@ const AddDriverDetails = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
+      <View >
+        <Text style={styles.title}>
+          Add New Record
+        </Text>
+       </View>
+    <ScrollView  style={{ flex: 1, margin: 10 }} contentContainerStyle={styles.container}>
       <TextInput
         placeholder="Vehicle Number"
         value={vehicleNumber}
@@ -95,7 +104,10 @@ const AddDriverDetails = () => {
         style={styles.input}
       />
       <Button title="Add Record" onPress={handleAddItem} />
+      
     </ScrollView>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 
@@ -110,6 +122,13 @@ const styles = StyleSheet.create({
     padding: 8,
     marginBottom: 16,
   },
+  title:{
+    marginTop:10,
+    fontSize: 30,
+    fontWeight:'bold',
+    color:'#ffffff',
+    textAlign: 'center',
+  }
 });
 
 export default AddDriverDetails;
