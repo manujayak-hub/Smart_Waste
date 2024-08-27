@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { ScrollView, View,Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import AdminNav from '../../Components/AdminNav';
@@ -16,7 +16,7 @@ const HomeDD = () => {
   return (
     <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
         <Header/>
-      <View style={{ flex: 1, margin: 20 }}>
+      <ScrollView style={{ flex: 1, margin: 20 }}>
        
         <Image
           source={hero}
@@ -49,8 +49,16 @@ const HomeDD = () => {
             <Text style={styles.buttonText}>Availability</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('UpdateDeleteDD')}>
+            <Image
+              source={edit}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Availability</Text>
+          </TouchableOpacity>
+
         </View>
-      </View>
+      </ScrollView>
       <AdminNav/>
     </SafeAreaView>
   );
