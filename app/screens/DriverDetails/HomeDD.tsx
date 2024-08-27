@@ -41,7 +41,7 @@ const HomeDD = () => {
             <Text style={styles.buttonText}>Edit Your</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('UpdateDeleteDD')}>
             <Image
               source={edit}
               style={styles.buttonImage}

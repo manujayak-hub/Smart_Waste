@@ -6,6 +6,7 @@ import AddDriverDetails from './app/screens/DriverDetails/AddDriverDetails';
 import DDList from './app/screens/DriverDetails/DDList';
 import SignUpScreen from './app/screens/SignUp';
 import Signinscreen from './app/screens/LogIn';
+import UpdateDeleteDD from './app/screens/DriverDetails/UpdateDeleteDD';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,9 @@ export default function App() {
         <Stack.Screen name="DDList" component={DDList} options={{headerShown:false}} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Signinscreen" component={Signinscreen} options={{headerShown:false}}/>
+        <Stack.Screen name="UpdateDeleteDD" component={UpdateDeleteDD} options={{headerShown:false}}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  ); 
 }
