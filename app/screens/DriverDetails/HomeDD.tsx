@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
 
 const hero = require('../../../assets/hero.jpg')
 const add = require('../../../assets/add.png')
@@ -13,6 +15,7 @@ const HomeDD = () => {
 
   return (
     <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
+        <Header/>
       <View style={{ flex: 1, margin: 20 }}>
        
         <Image
@@ -22,7 +25,7 @@ const HomeDD = () => {
         
         
         <View style={styles.gridContainer}>
-          <TouchableOpacity style={styles.gridItem} > 
+          <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('DDList')} > 
             <Image
               source={list}
               style={styles.buttonImage}
@@ -38,7 +41,7 @@ const HomeDD = () => {
             <Text style={styles.buttonText}>Edit Your</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.gridItem}>
+          <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('UpdateDeleteDD')}>
             <Image
               source={edit}
               style={styles.buttonImage}
@@ -48,6 +51,7 @@ const HomeDD = () => {
 
         </View>
       </View>
+      <AdminNav/>
     </SafeAreaView>
   );
 }
