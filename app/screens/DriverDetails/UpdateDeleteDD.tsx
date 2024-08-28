@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, TextInput, Button ,SafeAreaView} from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Modal, TextInput, Button, SafeAreaView } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import AdminNav from '../../Components/AdminNav';
 import Header from '../../Components/HeaderAdmin';
-
 
 interface DriverDetail {
   id: string;
@@ -60,131 +59,135 @@ const UpdateDeleteDD: React.FC = () => {
     }
   };
 
-  const renderItem = ({ item }: { item: DriverDetail }) => (
-    <View style={styles.itemContainer}>
-      <Text style={styles.itemText}>Vehicle Number: {item.vehicleNumber}</Text>
-      <Text style={styles.itemText}>Partner Name: {item.partnerName}</Text>
-      <Text style={styles.itemText}>Vehicle Type: {item.vehicleType}</Text>
-      <Text style={styles.itemText}>Capacity: {item.capacity}</Text>
-      <Text style={styles.itemText}>Collecting Area: {item.collectingArea}</Text>
-      <Text style={styles.itemText}>Arrival Date: {item.arrivalDate}</Text>
-      <Text style={styles.itemText}>Leaving Date: {item.leavingDate}</Text>
-
-      
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            setSelectedDetail(item);
-            setUpdatedDetail(item);
-            setModalVisible(true);
-          }}
-        >
-          <Text style={styles.buttonText}>Update</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => handleDelete(item.id)}>
-          <Text style={styles.buttonText}>Delete</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-
   return (
-    <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
-        <Header/>
-      <View style={{ flex: 1, margin: 20 }} >
-    <View style={styles.listContainer}>
-      <FlatList
-        data={driverDetails}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#89F28D' }}>
+      <Header />
+      <View>
+        <Text style={styles.title}>Change Record </Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        {driverDetails.map((item) => (
+          <View key={item.id} style={styles.card}>
+            <Text style={styles.cardTitle}>{item.vehicleNumber}</Text>
+            <Text style={styles.cardText}>Partner Name: {item.partnerName}</Text>
+            <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
+            <Text style={styles.cardText}>Capacity: {item.capacity}</Text>
+            <Text style={styles.cardText}>Collecting Area: {item.collectingArea}</Text>
+            <Text style={styles.cardText}>Arrival Date: {item.arrivalDate}</Text>
+            <Text style={styles.cardText}>Leaving Date: {item.leavingDate}</Text>
 
-      
-      {modalVisible && updatedDetail && (
-        <Modal
-          visible={modalVisible}
-          animationType="slide"
-          transparent={true}
-          onRequestClose={() => setModalVisible(false)}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <Text style={styles.modalTitle}>Update Driver Detail</Text>
-
-              <TextInput
-                style={styles.input}
-                placeholder="Vehicle Number"
-                value={updatedDetail.vehicleNumber}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, vehicleNumber: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Partner Name"
-                value={updatedDetail.partnerName}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, partnerName: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Vehicle Type"
-                value={updatedDetail.vehicleType}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, vehicleType: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Capacity"
-                value={updatedDetail.capacity}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, capacity: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Collecting Area"
-                value={updatedDetail.collectingArea}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, collectingArea: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Arrival Date"
-                value={updatedDetail.arrivalDate}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, arrivalDate: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Leaving Date"
-                value={updatedDetail.leavingDate}
-                onChangeText={text => setUpdatedDetail({ ...updatedDetail, leavingDate: text })}
-              />
-
-              <Button title="Save" onPress={handleUpdate} />
-              <Button title="Cancel" onPress={() => setModalVisible(false)} />
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  setSelectedDetail(item);
+                  setUpdatedDetail(item);
+                  setModalVisible(true);
+                }}
+              >
+                <Text style={styles.buttonText}>Update</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => handleDelete(item.id)}>
+                <Text style={styles.buttonText}>Delete</Text>
+              </TouchableOpacity>
             </View>
           </View>
-        </Modal>
-      )}
-    </View>
-    </View>
-    <AdminNav/>
+        ))}
+
+        {modalVisible && updatedDetail && (
+          <Modal
+            visible={modalVisible}
+            animationType="slide"
+            transparent={true}
+            onRequestClose={() => setModalVisible(false)}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <Text style={styles.modalTitle}>Update Driver Detail</Text>
+
+                <TextInput
+                  style={styles.input}
+                  placeholder="Vehicle Number"
+                  value={updatedDetail.vehicleNumber}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, vehicleNumber: text })}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Partner Name"
+                  value={updatedDetail.partnerName}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, partnerName: text })}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Vehicle Type"
+                  value={updatedDetail.vehicleType}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, vehicleType: text })}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Capacity"
+                  value={updatedDetail.capacity}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, capacity: text })}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Collecting Area"
+                  value={updatedDetail.collectingArea}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, collectingArea: text })}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Arrival Date"
+                  value={updatedDetail.arrivalDate}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, arrivalDate: text })}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Leaving Date"
+                  value={updatedDetail.leavingDate}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, leavingDate: text })}
+                />
+
+                <Button title="Save" onPress={handleUpdate} />
+                <Button title="Cancel" onPress={() => setModalVisible(false)} />
+              </View>
+            </View>
+          </Modal>
+        )}
+      </ScrollView>
+      <AdminNav />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    padding: 16,
+  scrollViewContainer: {
+    padding: 10,
   },
-  itemContainer: {
-    backgroundColor: '#f9f9f9',
-    padding: 16,
-    marginBottom: 16,
-    borderRadius: 8,
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
-  itemText: {
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  cardText: {
     fontSize: 16,
-    marginBottom: 8,
+    marginBottom: 5,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 10,
   },
   button: {
     padding: 8,
@@ -218,6 +221,13 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     borderRadius: 4,
   },
+  title: {
+    marginTop: 10,
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    textAlign: 'center',
+  }
 });
 
 export default UpdateDeleteDD;

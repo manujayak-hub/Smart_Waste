@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet ,SafeAreaView} from 'react-native';
+import { View, Text, ScrollView, StyleSheet, SafeAreaView } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs } from 'firebase/firestore';
 import AdminNav from '../../Components/AdminNav';
 import Header from '../../Components/HeaderAdmin';
-
 
 interface DriverDetail {
   id: string;
@@ -34,47 +33,60 @@ const DDList: React.FC = () => {
     fetchDriverDetails();
   }, []);
 
-  const renderItem = ({ item }: { item: DriverDetail }) => (
-    <View style={styles.itemContainer}>
-      <Text style={styles.itemText}>Vehicle Number: {item.vehicleNumber}</Text>
-      <Text style={styles.itemText}>Partner Name: {item.partnerName}</Text>
-      <Text style={styles.itemText}>Vehicle Type: {item.vehicleType}</Text>
-      <Text style={styles.itemText}>Capacity: {item.capacity}</Text>
-      <Text style={styles.itemText}>Collecting Area: {item.collectingArea}</Text>
-      <Text style={styles.itemText}>Arrival Date: {item.arrivalDate}</Text>
-      <Text style={styles.itemText}>Leaving Date: {item.leavingDate}</Text>
-    </View>
-  );
-
   return (
-    <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
-        <Header/>
-      <View style={{ flex: 1, margin: 20 }} >
-    <FlatList
-      data={driverDetails}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-      contentContainerStyle={styles.listContainer}
-    />
-    </View>
-    <AdminNav/>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#89F28D' }}>
+      <Header />
+      <View>
+        <Text style={styles.title}>Driver Details</Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+        {driverDetails.map((item) => (
+          <View key={item.id} style={styles.card}>
+            <Text style={styles.cardTitle}>{item.vehicleNumber}</Text>
+            <Text style={styles.cardText}>Partner Name: {item.partnerName}</Text>
+            <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
+            <Text style={styles.cardText}>Capacity: {item.capacity}</Text>
+            <Text style={styles.cardText}>Collecting Area: {item.collectingArea}</Text>
+            <Text style={styles.cardText}>Leaving Time: {item.leavingDate}</Text>
+            <Text style={styles.cardText}>Arrival Time: {item.arrivalDate}</Text>
+          </View>
+        ))}
+      </ScrollView>
+      <AdminNav />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  listContainer: {
-    padding: 16,
+  scrollViewContainer: {
+    padding: 10,
   },
-  itemContainer: {
-    backgroundColor: '#f9f9f9',
-    padding: 16,
-    marginBottom: 16,
-    borderRadius: 8,
+  card: {
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    padding: 20,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
-  itemText: {
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  cardText: {
     fontSize: 16,
-    marginBottom: 8,
+    marginBottom: 5,
+  },
+  title: {
+    marginTop: 10,
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    textAlign: 'center',
   },
 });
 
