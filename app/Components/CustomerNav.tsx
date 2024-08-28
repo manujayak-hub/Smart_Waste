@@ -2,31 +2,31 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
 
-
 // Import your icons
-const homeicon = require('../../assets/nav (1).png');
-const guideicon = require('../../assets/nav (2).png');
-const profileicon = require('../../assets/nav (3).png');
+const homeicon = require('../../assets/CusHome.png');
+const guideicon = require('../../assets/ChatbotIcon.png');
+const profileicon = require('../../assets/ProfileIcon.png');
 
 const AdminNav: React.FC = () => {
   const navigation: any = useNavigation();
 
   return (
     <View style={styles.container}>
-      
-      <TouchableOpacity onPress={() => navigation.navigate('HomeDD')} style={styles.iconContainer}>
+      {/* Home Icon */}
+      <TouchableOpacity onPress={() => navigation.navigate('CustomerHome')} style={styles.iconContainer}>
         <Image source={homeicon} style={styles.icon} />
       </TouchableOpacity>
 
-      
+      {/* Guide Icon */}
       <TouchableOpacity onPress={() => navigation.navigate('Guide')} style={styles.iconContainer}>
         <Image source={guideicon} style={styles.icon} />
       </TouchableOpacity>
 
-      
-      <TouchableOpacity onPress={() => navigation.navigate('AdminSideComplaint')} style={styles.iconContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.iconContainer}>
         <Image source={profileicon} style={styles.icon} />
       </TouchableOpacity>
+  
+
     </View>
   );
 };

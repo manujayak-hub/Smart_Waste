@@ -48,7 +48,6 @@ const HomeDD = () => {
             />
             <Text style={styles.buttonText}>Availability</Text>
           </TouchableOpacity>
-
         </View>
       </View>
       <AdminNav/>
