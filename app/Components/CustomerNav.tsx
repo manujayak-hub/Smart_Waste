@@ -25,7 +25,7 @@ const AdminNav: React.FC = () => {
       </TouchableOpacity>
 
       {/* Camera Icon */}
-      <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.iconContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('CameradScreen')} style={styles.iconContainer}>
         <Image source={cameraicon} style={styles.icon} />
         <Text style={styles.iconLabel}>Camera</Text>
       </TouchableOpacity>
