@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Modal, TextInput, Button, Alert } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import CustomerNav from '../../Components/CustomerNav';
 
 interface Complaint {
   id: string;
@@ -150,6 +151,7 @@ const UpdateDeleteComplaint: React.FC = () => {
           </View>
         </Modal>
       )}
+      <CustomerNav />
     </View>
   );
 };
@@ -157,37 +159,40 @@ const UpdateDeleteComplaint: React.FC = () => {
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-    backgroundColor: '#89F28D',
-   
-    padding: 16,
+    backgroundColor: '#E8F5E9',
+    padding: 0,
+    marginTop: 20,
   },
   itemContainer: {
     backgroundColor: '#fff',
     padding: 16,
     marginBottom: 16,
-    borderRadius: 8,
-    elevation: 3,
+    borderRadius: 12,
+    elevation: 5,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    marginHorizontal: 16,
   },
   itemText: {
     fontSize: 16,
     color: '#333',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16,
+    marginTop: 12,
   },
   button: {
-    padding: 10,
+    padding: 12,
     backgroundColor: '#007bff',
-    borderRadius: 4,
+    borderRadius: 6,
     flex: 1,
-    marginHorizontal: 4,
+    marginHorizontal: 6,
     alignItems: 'center',
   },
   deleteButton: {
@@ -196,6 +201,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize: 16,
   },
   modalContainer: {
     flex: 1,
@@ -205,29 +211,29 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 8,
+    padding: 24,
+    borderRadius: 12,
     width: '90%',
     maxWidth: 500,
   },
   modalTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 12,
+    marginBottom: 16,
     color: '#007bff',
   },
   input: {
-    height: 40,
+    height: 45,
     borderColor: '#ccc',
     borderWidth: 1,
-    marginBottom: 12,
-    paddingLeft: 8,
-    borderRadius: 4,
+    marginBottom: 16,
+    paddingLeft: 12,
+    borderRadius: 8,
   },
   modalButtonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 24,
   },
 });
 

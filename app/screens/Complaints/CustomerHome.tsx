@@ -3,20 +3,18 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'r
 import { useNavigation } from '@react-navigation/native';
 import CustomerNav from '../../Components/CustomerNav';
 
-const hero = require('../../../assets/hero.jpg');
+const hero = require('../../../assets/homeHero.jpg');
 const add = require('../../../assets/add.png');
 const edit = require('../../../assets/edit.png');
 const list = require('../../../assets/list.png');
 
 const CustomerHome: React.FC = () => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<any>(); // You can replace 'any' with specific type if needed
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#89F28D' }}>
-      <View style={{ flex: 1, margin: 20 }}>
-        <Text style={styles.header}>Smart Waste</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.innerContainer}>
         <Image source={hero} style={styles.topImage} />
-        
         <View style={styles.gridContainer}>
           <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('AddComplaint')}>
             <Image source={add} style={styles.buttonImage} />
@@ -40,9 +38,19 @@ const CustomerHome: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#89F28D',
+  },
+  innerContainer: {
+    flex: 1,
+    margin: 20,
+    paddingBottom: 20, // Add padding to the bottom to ensure even spacing
+  },
   topImage: {
     width: '100%',
-    height: 200,
+    height: 300,
+    borderRadius: 15,
     marginBottom: 10,
   },
   gridContainer: {
@@ -52,11 +60,17 @@ const styles = StyleSheet.create({
   gridItem: {
     width: '100%',
     aspectRatio: 3,
-    marginBottom: 20,
+    marginBottom: 20, // Ensure even spacing between items
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
-    borderRadius: 10,
+    borderRadius: 15,
+    padding: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 5,
+    elevation: 5,
   },
   buttonImage: {
     width: 60,
@@ -64,17 +78,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#F96D2B',
     textAlign: 'center',
-  },
-  header: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: '#388E3C',
-    textAlign: 'center',
-    marginTop: 20,
   },
 });
 

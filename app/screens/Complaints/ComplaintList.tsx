@@ -72,7 +72,7 @@ const ComplaintList: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#89F28D',
+    backgroundColor: '#E8F5E9',
   },
   listContainer: {
     padding: 16,

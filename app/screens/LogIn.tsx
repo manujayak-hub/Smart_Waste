@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, TextInput, ActivityIndicator, Button, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
+import { View, Image, TextInput, ActivityIndicator, Button, StyleSheet, Alert, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_AUTH } from '../../Firebase_Config';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { FIREBASE_DB } from '../../Firebase_Config';
+
+const hero = require('../../assets/homeHero.jpg');
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -39,8 +41,9 @@ const LoginScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      
+
       <Text style={styles.header}>Smart Waste</Text>
+      <Image source={hero} style={styles.topImage} />
       <TextInput 
         value={email} 
         placeholder="Email" 
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     color: '#4CAF50',
-    marginBottom: 40,
+    marginBottom: 20,
   },
   input: {
     width: '100%',
@@ -117,6 +120,12 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  topImage: {
+    width: '100%',
+    height: 300,
+    borderRadius: 15,
+    marginBottom: 20,
   },
 });
 
