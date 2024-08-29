@@ -25,7 +25,7 @@ const LoginScreen = () => {
             navigation.navigate('HomeDD', { user: userData });
         } else {
             Alert.alert('customer');
-          //navigation.navigate('Page2', { user: userData });
+          navigation.navigate('CameradScreen', { user: userData });
         }
       } else {
         Alert.alert('Error', 'No user data found');
