@@ -9,13 +9,8 @@ const HeaderAdmin :React.FC = () => {
   return (
   
   <SafeAreaView >
-    <View style={{padding:20 ,backgroundColor:'#F96D2B'}}>
-    <Text style={{fontSize:8, color:'#ffffff'}}>Shop Owner</Text>
-    <Text style={{fontSize:8, color:'#ffffff'}}>DashBoard</Text>
-    <StatusBar backgroundColor="#F96D2B" barStyle="light-content" />
-    
-      
-    </View>
+    <StatusBar backgroundColor="#89F28D" barStyle="light-content" />
+   
     
   </SafeAreaView>
   

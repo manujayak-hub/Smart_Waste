@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { ScrollView, View,Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import AdminNav from '../../Components/AdminNav';
@@ -16,8 +16,12 @@ const HomeDD = () => {
   return (
     <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
         <Header/>
-      <View style={{ flex: 1, margin: 20 }}>
-       
+      <ScrollView style={{ flex: 1, margin: 20 }} showsVerticalScrollIndicator={false}>
+       <View >
+        <Text style={styles.title}>
+          Driver Details
+        </Text>
+       </View>
         <Image
           source={hero}
           style={styles.topImage}
@@ -30,7 +34,7 @@ const HomeDD = () => {
               source={list}
               style={styles.buttonImage}
             />
-            <Text style={styles.buttonText}>Add Your</Text>
+            <Text style={styles.buttonText}>View Driver Details Records</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.gridItem  } onPress={() => navigation.navigate('AddDriverDetails')}>
@@ -38,7 +42,7 @@ const HomeDD = () => {
               source={add}
               style={styles.buttonImage}
             />
-            <Text style={styles.buttonText}>Edit Your</Text>
+            <Text style={styles.buttonText}>Add New Record</Text>
           </TouchableOpacity>
           
           <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('UpdateDeleteDD')}>
@@ -46,11 +50,12 @@ const HomeDD = () => {
               source={edit}
               style={styles.buttonImage}
             />
-            <Text style={styles.buttonText}>Availability</Text>
-          </TouchableOpacity>
+            <Text style={styles.buttonText}>Update & Delete Records</Text>
+          </TouchableOpacity>  
+          
 
         </View>
-      </View>
+      </ScrollView>
       <AdminNav/>
     </SafeAreaView>
   );
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
   topImage: {
     width: '100%',
     height: 250,
-    marginBottom: 10,
+    marginBottom: 30,
   },
   gridContainer: {
     flexDirection: 'column', 
@@ -85,7 +90,13 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#F96D2B',
+    color: '#38e079',
     textAlign: 'center',
   },
+  title:{
+    fontSize: 30,
+    fontWeight:'bold',
+    color:'#ffffff',
+    textAlign: 'center',
+  }
 });

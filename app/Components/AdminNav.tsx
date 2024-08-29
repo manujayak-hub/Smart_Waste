@@ -13,17 +13,19 @@ const AdminNav: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {/* Home Icon */}
-      <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.iconContainer}>
+      
+      <TouchableOpacity onPress={() => navigation.navigate('HomeDD')} style={styles.iconContainer}>
         <Image source={homeicon} style={styles.icon} />
       </TouchableOpacity>
 
+
       {/* Guide Icon */}
       <TouchableOpacity onPress={() => navigation.navigate('HomeG')} style={styles.iconContainer}>
+
         <Image source={guideicon} style={styles.icon} />
       </TouchableOpacity>
 
-      {/* Profile Icon */}
+      
       <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.iconContainer}>
         <Image source={profileicon} style={styles.icon} />
       </TouchableOpacity>

@@ -21,7 +21,7 @@ const LoginScreen = () => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         if (userData.type === 'Admin') {
-            Alert.alert('Admin');
+            
             navigation.navigate('HomeDD', { user: userData });
         } else {
             Alert.alert('customer');
