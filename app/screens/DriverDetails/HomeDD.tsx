@@ -50,6 +50,10 @@ const HomeDD = () => {
               source={edit}
               style={styles.buttonImage}
             />
+
+            <Text style={styles.buttonText}>Availability</Text>
+          </TouchableOpacity>
+
             <Text style={styles.buttonText}>Update & Delete Records</Text>
           </TouchableOpacity>  
           
@@ -60,6 +64,7 @@ const HomeDD = () => {
     </SafeAreaView>
   );
 }
+
 
 export default HomeDD;
 
