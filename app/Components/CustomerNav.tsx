@@ -19,7 +19,7 @@ const AdminNav: React.FC = () => {
       </TouchableOpacity>
 
       {/* Guide Icon */}
-      <TouchableOpacity onPress={() => navigation.navigate('Guide')} style={styles.iconContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('Chatbot')} style={styles.iconContainer}>
         <Image source={guideicon} style={styles.icon} />
         <Text style={styles.iconLabel}>Chatbot</Text>
       </TouchableOpacity>

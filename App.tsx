@@ -9,7 +9,7 @@ import Signinscreen from './app/screens/LogIn';
 import UpdateDeleteDD from './app/screens/DriverDetails/UpdateDeleteDD';
 
 import CameradScreen from './app/screens/CameradScreen';
-
+import Chatbot from './app/screens/Chatbot';
 
 import AddGarbagePlace from './app/screens/GarbagePlaces/AddGarbagePlace';
 import HomeG from './app/screens/GarbagePlaces/HomeG';
@@ -39,6 +39,7 @@ export default function App() {
 
 
         <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="Chatbot" component={Chatbot} options={{headerShown:false}}/>
 
 
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
