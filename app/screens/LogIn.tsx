@@ -28,8 +28,13 @@ const LoginScreen: React.FC = () => {
 
             navigation.navigate('HomeDD', { user: userData });
         } else {
+
+            Alert.alert('customer');
+          navigation.navigate('CameradScreen', { user: userData });
+
             Alert.alert('Hello Customer');
             navigation.navigate('CustomerHome', { user: userData });
+
         }
       } else {
         Alert.alert('Error', 'No user data found');

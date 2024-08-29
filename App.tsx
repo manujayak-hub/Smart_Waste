@@ -7,6 +7,10 @@ import DDList from './app/screens/DriverDetails/DDList';
 import SignUpScreen from './app/screens/SignUp';
 import Signinscreen from './app/screens/LogIn';
 import UpdateDeleteDD from './app/screens/DriverDetails/UpdateDeleteDD';
+
+import CameradScreen from './app/screens/CameradScreen';
+
+
 import AddGarbagePlace from './app/screens/GarbagePlaces/AddGarbagePlace';
 import HomeG from './app/screens/GarbagePlaces/HomeG';
 import PlaceView from './app/screens/GarbagePlaces/PlaceView';
@@ -18,6 +22,7 @@ import ComplaintList from './app/screens/Complaints/ComplaintList';
 import UpdateDeleteComplaint from './app/screens/Complaints/UpdateDeleteComplaint';
 import AdminSideComplaint from './app/screens/Complaints/AdminSideComplaint';
 import LogIn from './app/screens/LogIn';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +38,9 @@ export default function App() {
         <Stack.Screen name="UpdateDeleteDD" component={UpdateDeleteDD} options={{headerShown:false}}/>
 
 
+        <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
+
+
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
 
         <Stack.Screen name="AddComplaint" component={AddComplaint} options={{headerShown:false}} />
@@ -40,6 +48,7 @@ export default function App() {
         <Stack.Screen name="ComplaintList" component={ComplaintList} options={{headerShown:false}} />
         <Stack.Screen name="UpdateDeleteComplaint" component={UpdateDeleteComplaint} options={{headerShown:false}} />
         <Stack.Screen name="AdminSideComplaint" component={AdminSideComplaint} options={{headerShown:false}} />
+
         
 
         <Stack.Screen name="AddGarbagePlace" component={AddGarbagePlace} options={{headerShown:false}}/>
