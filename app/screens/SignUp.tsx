@@ -5,7 +5,7 @@ import { FIREBASE_AUTH, FIREBASE_DB } from '../../Firebase_Config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
-const SignUpScreen = () => {
+const SignUpScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -39,7 +39,7 @@ const SignUpScreen = () => {
       setUserType('Customer');
 
       // Display success alert
-      Alert.alert('Success', 'Account created successfully!', [{ text: 'OK', onPress: () => navigation.navigate('Login') }]);
+      Alert.alert('Success', 'Account created successfully!', [{ text: 'OK', onPress: () => navigation.navigate('LogIn') }]);
     } catch (error:any) {
       Alert.alert('Error', error.message);
     }
@@ -47,6 +47,7 @@ const SignUpScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.header}>Smart Waste</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -83,9 +84,11 @@ const SignUpScreen = () => {
           <Text style={userType === 'Admin' ? styles.radioButtonTextSelected : styles.radioButtonText}>Admin</Text>
         </TouchableOpacity>
       </View>
-     
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginRedirect} onPress={() => navigation.navigate('LogIn')}>
+        <Text style={styles.loginText}>Already have an account? Login</Text>
       </TouchableOpacity>
     </View>
   );
@@ -96,18 +99,30 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: '#E8F5E9',
+  },
+  header: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#4CAF50',
+    marginBottom: 40,
+    textAlign: 'center',
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#4CAF50',
     borderWidth: 1,
     borderRadius: 5,
     marginBottom: 15,
     paddingHorizontal: 10,
+    backgroundColor: '#ffffff',
+    fontSize: 16,
   },
   label: {
     marginVertical: 10,
     fontSize: 16,
+    fontWeight: 'bold',
+    color: '#4CAF50',
   },
   radioGroup: {
     flexDirection: 'row',
@@ -119,13 +134,15 @@ const styles = StyleSheet.create({
   },
   radioButtonText: {
     fontSize: 16,
+    color: '#4CAF50',
   },
   radioButtonTextSelected: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#007BFF',
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#4CAF50',
     padding: 15,
     borderRadius: 5,
     marginBottom: 15,
@@ -134,6 +151,15 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
+  },
+  loginRedirect: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  loginText: {
+    fontSize: 16,
+    color: '#007BFF',
   },
 });
 
