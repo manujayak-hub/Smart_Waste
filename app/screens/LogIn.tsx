@@ -23,7 +23,9 @@ const LoginScreen: React.FC = () => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         if (userData.type === 'Admin') {
+
             Alert.alert('Hello Admin');
+
             navigation.navigate('HomeDD', { user: userData });
         } else {
             Alert.alert('Hello Customer');
