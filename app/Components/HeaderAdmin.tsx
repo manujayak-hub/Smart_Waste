@@ -9,12 +9,8 @@ const HeaderAdmin :React.FC = () => {
   return (
   
   <SafeAreaView >
-    <View style={{padding:5 ,backgroundColor:'#F96D2B'}}>
-    <Text style={{fontSize:20, color:'#ffffff'}}>Admin DashBoard</Text>
-    <StatusBar backgroundColor="#F96D2B" barStyle="light-content" />
-    
-      
-    </View>
+    <StatusBar backgroundColor="#89F28D" barStyle="light-content" />
+   
     
   </SafeAreaView>
   
@@ -23,4 +19,3 @@ const HeaderAdmin :React.FC = () => {
 
 
 export default HeaderAdmin
-
