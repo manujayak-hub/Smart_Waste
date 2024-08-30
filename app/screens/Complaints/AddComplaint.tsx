@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Alert, TextInput } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { addDoc, collection } from 'firebase/firestore';
@@ -6,6 +6,7 @@ import { List } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { MaterialIcons } from '@expo/vector-icons';
 import MapView, { Marker } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 const AddComplaint: React.FC = () => {
   const [fullName, setFullName] = useState<string>('');
@@ -18,8 +19,26 @@ const AddComplaint: React.FC = () => {
   const [garbageExpanded, setGarbageExpanded] = useState<boolean>(false);
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
   const [date, setDate] = useState<Date | undefined>(undefined);
-  const [mapVisible, setMapVisible] = useState<boolean>(false);
   const [selectedLocation, setSelectedLocation] = useState<{ latitude: number, longitude: number } | null>(null);
+
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Permission Denied', 'Permission to access location was denied');
+        return;
+      }
+
+      const location = await Location.getCurrentPositionAsync({});
+      setSelectedLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+      setGarbageLocation(`Lat: ${location.coords.latitude}, Long: ${location.coords.longitude}`);
+    };
+
+    requestLocationPermission();
+  }, []);
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || date;
@@ -64,10 +83,6 @@ const AddComplaint: React.FC = () => {
       console.error('Error adding complaint: ', error);
       Alert.alert('Error', 'Failed to add complaint');
     }
-  };
-
-  const openMap = async () => {
-    setMapVisible(true);
   };
 
   return (
@@ -165,11 +180,11 @@ const AddComplaint: React.FC = () => {
       </List.Accordion>
 
       <View style={styles.locationContainer}>
-        <TouchableOpacity onPress={openMap} style={styles.mapButton}>
+        <TouchableOpacity style={styles.mapButton}>
           <View style={styles.mapButtonContent}>
             <MaterialIcons name="location-on" size={24} color="#333" style={styles.locationIcon} />
             <Text style={styles.mapButtonText}>
-              {selectedLocation ? `Location Selected: Lat ${selectedLocation.latitude}, Long ${selectedLocation.longitude}` : 'Select Garbage Location'}
+              {selectedLocation ? `Current Location: Lat ${selectedLocation.latitude}, Long ${selectedLocation.longitude}` : 'Fetching current location...'}
             </Text>
           </View>
         </TouchableOpacity>
@@ -186,32 +201,6 @@ const AddComplaint: React.FC = () => {
       <TouchableOpacity style={styles.button} onPress={handleAddItem}>
         <Text style={styles.buttonText}>Submit Complaint</Text>
       </TouchableOpacity>
-
-      {mapVisible && (
-        <View style={styles.mapContainer}>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: selectedLocation?.latitude || 37.78825,
-              longitude: selectedLocation?.longitude || -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            onPress={(e) => {
-              const { latitude, longitude } = e.nativeEvent.coordinate;
-              setSelectedLocation({ latitude, longitude });
-              setGarbageLocation(`Lat: ${latitude}, Long: ${longitude}`);
-            }}
-          >
-            {selectedLocation && (
-              <Marker coordinate={selectedLocation} />
-            )}
-          </MapView>
-          <TouchableOpacity onPress={() => setMapVisible(false)} style={styles.closeButton}>
-            <Text style={styles.closeButtonText}>Close Map</Text>
-          </TouchableOpacity>
-        </View>
-      )}
     </ScrollView>
   );
 };
@@ -293,32 +282,9 @@ const styles = StyleSheet.create({
     color: '#333',
     fontSize: 16,
   },
-  mapContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 600,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-  closeButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: '#fff',
-    padding: 10,
-    borderRadius: 5,
-  },
-  closeButtonText: {
-    color: '#333',
-    fontSize: 16,
-  },
   button: {
-    padding: 14,
     backgroundColor: '#4CAF50',
+    padding: 14,
     borderRadius: 10,
     alignItems: 'center',
   },
