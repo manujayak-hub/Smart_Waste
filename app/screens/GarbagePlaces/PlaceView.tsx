@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert , Linking} from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -51,29 +51,46 @@ const PlaceView = ({ route }) => {
     );
   }
 
+  const openInGoogleMaps = () => {
+    if (garbagePlace.address) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(garbagePlace.address)}`;
+      Linking.openURL(url).catch(err => console.error('Error opening Google Maps', err));
+    } else {
+      alert("No address provided to open in Google Maps.");
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.layoutgd}>
       <Text style={styles.header}>Garbage View</Text>
       <View style={styles.infoContainer}>
 
-        <Text style={styles.label}>Location Name:</Text>
-        <Text style={styles.value}>{garbagePlace.locationName}</Text>
       
+        <Text style={styles.label}>Location Name:</Text>
+        <View style={styles.vf}>
+        <Text style={styles.value}>{garbagePlace.locationName}</Text>
+        </View>
       
         <Text style={styles.label}>Address:</Text>
+        <View style={styles.vf}>
         <Text style={styles.value}>{garbagePlace.address}</Text>
+        </View>
+        <TouchableOpacity style={styles.btnl} onPress={openInGoogleMaps}><Text style={styles.btnt}>View on Map</Text></TouchableOpacity>
       
      
         <Text style={styles.label}>Capacity:</Text>
-        <Text style={styles.value}>{garbagePlace.capacity}</Text>
+        <View style={styles.vf}>
+        <Text style={styles.value}>{garbagePlace.capacity}</Text></View>
     
       
         <Text style={styles.label}>Contact Person:</Text>
-        <Text style={styles.value}>{garbagePlace.contactPerson}</Text>
+        <View style={styles.vf}>
+        <Text style={styles.value}>{garbagePlace.contactPerson}</Text></View>
       
     
         <Text style={styles.label}>Phone Number:</Text>
-        <Text style={styles.value}>{garbagePlace.phoneNumber}</Text>
+        <View style={styles.vf}>
+        <Text style={styles.value}>{garbagePlace.phoneNumber}</Text></View>
         </View>
       <View style={styles.btnf}>
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditPlace', { id })}>
@@ -93,6 +110,7 @@ const styles = StyleSheet.create({
   layoutgd: {
     padding: 20,
     backgroundColor:'#EFF6F0' ,
+    
   },
   header: {
     fontWeight: '700',
@@ -101,7 +119,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
       width: '100%',
-      height:500,
+      height:600,
       backgroundColor: '#C2E0C0',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 0 },
@@ -127,7 +145,7 @@ const styles = StyleSheet.create({
   value: {
     fontSize: 16,
     flex: 2,
-    marginLeft:40,
+    
     
   },
 
@@ -136,6 +154,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius:10,
     backgroundColor:'#151515',
+
   },
 
   btnt:{
@@ -149,5 +168,24 @@ const styles = StyleSheet.create({
     flexDirection: 'row',         // Align children in a row
     justifyContent: 'space-between', // Space out the buttons evenly
     padding: 10, 
+  },
+
+  vf:{
+    height: 40,
+    borderColor: '#FFFFFF',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginBottom: 20,
+    backgroundColor:'#FFFFFF',
+    borderRadius:5,
+   
+  },
+  btnl:{
+    width:'40%',
+    height: 50,
+    borderRadius:10,
+    backgroundColor:'#151515',
+    marginBottom:20,
+    marginLeft:40,
   },
 });
