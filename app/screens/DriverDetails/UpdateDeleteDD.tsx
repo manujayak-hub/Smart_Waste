@@ -14,6 +14,7 @@ interface DriverDetail {
   collectingArea: string;
   arrivalDate: string;
   leavingDate: string;
+  cdate: string;
 }
 
 const UpdateDeleteDD: React.FC = () => {
@@ -63,11 +64,14 @@ const UpdateDeleteDD: React.FC = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#89F28D' }}>
       <Header />
       <View>
-        <Text style={styles.title}>Change Record </Text>
+        <Text style={styles.title}>Change Record</Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {driverDetails.map((item) => (
           <View key={item.id} style={styles.card}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.cardDate}>{new Date(item.cdate).toLocaleDateString()}</Text>
+            </View>
             <Text style={styles.cardTitle}>{item.vehicleNumber}</Text>
             <Text style={styles.cardText}>Partner Name: {item.partnerName}</Text>
             <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
@@ -87,7 +91,7 @@ const UpdateDeleteDD: React.FC = () => {
               >
                 <Text style={styles.buttonText}>Update</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => handleDelete(item.id)}>
+              <TouchableOpacity style={styles.buttonDelete} onPress={() => handleDelete(item.id)}>
                 <Text style={styles.buttonText}>Delete</Text>
               </TouchableOpacity>
             </View>
@@ -104,6 +108,8 @@ const UpdateDeleteDD: React.FC = () => {
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
                 <Text style={styles.modalTitle}>Update Driver Detail</Text>
+
+                <Text style={styles.modalCdate}>Created Date: {new Date(updatedDetail.cdate).toLocaleDateString()}</Text>
 
                 <TextInput
                   style={styles.input}
@@ -148,8 +154,14 @@ const UpdateDeleteDD: React.FC = () => {
                   onChangeText={text => setUpdatedDetail({ ...updatedDetail, leavingDate: text })}
                 />
 
-                <Button title="Save" onPress={handleUpdate} />
-                <Button title="Cancel" onPress={() => setModalVisible(false)} />
+                <View style={styles.modalButtonContainer}>
+                  <TouchableOpacity style={styles.modalButton} onPress={handleUpdate}>
+                    <Text style={styles.buttonText}>Save</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.modalButtonCancel} onPress={() => setModalVisible(false)}>
+                    <Text style={styles.buttonText}>Cancel</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </Modal>
@@ -175,14 +187,26 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
   },
+  cardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  cardDate: {
+    fontSize: 14,
+    color: '#555',
+    textAlign: 'right',
+  },
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
   },
   cardText: {
     fontSize: 16,
     marginBottom: 5,
+    textAlign: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -191,11 +215,21 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 8,
-    backgroundColor: '#007bff',
+    backgroundColor: '#89F28D',
     borderRadius: 4,
+    flex: 1,
+    marginRight: 5,
+  },
+  buttonDelete: {
+    padding: 8,
+    backgroundColor: '#ff4d4d',
+    borderRadius: 4,
+    flex: 1,
+    marginLeft: 5,
   },
   buttonText: {
     color: '#fff',
+    textAlign: 'center',
   },
   modalContainer: {
     flex: 1,
@@ -212,6 +246,13 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     marginBottom: 12,
+    textAlign: 'center',
+  },
+  modalCdate: {
+    fontSize: 14,
+    color: '#555',
+    marginBottom: 12,
+    textAlign: 'center',
   },
   input: {
     height: 40,
@@ -221,11 +262,30 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     borderRadius: 4,
   },
+  modalButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  modalButton: {
+    padding: 10,
+    backgroundColor: '#89F28D',
+    borderRadius: 4,
+    flex: 1,
+    marginRight: 5,
+  },
+  modalButtonCancel: {
+    padding: 10,
+    backgroundColor: '#ff4d4d',
+    borderRadius: 4,
+    flex: 1,
+    marginLeft: 5,
+  },
   title: {
     marginTop: 10,
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#181818',
     textAlign: 'center',
   }
 });
