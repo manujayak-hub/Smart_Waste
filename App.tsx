@@ -8,6 +8,7 @@ import SignUpScreen from './app/screens/SignUp';
 import Signinscreen from './app/screens/LogIn';
 import UpdateDeleteDD from './app/screens/DriverDetails/UpdateDeleteDD';
 
+
 import CameradScreen from './app/screens/CameradScreen';
 
 
@@ -15,6 +16,7 @@ import AddGarbagePlace from './app/screens/GarbagePlaces/AddGarbagePlace';
 import HomeG from './app/screens/GarbagePlaces/HomeG';
 import PlaceView from './app/screens/GarbagePlaces/PlaceView';
 import EditPlace from './app/screens/GarbagePlaces/EditPlace';
+import MapLocator from './app/screens/GarbagePlaces/MapLocator';
 
 import AddComplaint from './app/screens/Complaints/AddComplaint';
 import CustomerHome from './app/screens/Complaints/CustomerHome';
@@ -38,9 +40,6 @@ export default function App() {
         <Stack.Screen name="UpdateDeleteDD" component={UpdateDeleteDD} options={{headerShown:false}}/>
 
 
-        <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
-
-
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
 
         <Stack.Screen name="AddComplaint" component={AddComplaint} options={{headerShown:false}} />
@@ -55,6 +54,10 @@ export default function App() {
         <Stack.Screen name="HomeG" component={HomeG} options={{headerShown:false}}/>
         <Stack.Screen name="PlaceView" component={PlaceView} options={{headerShown:false}}/>
         <Stack.Screen name="EditPlace" component={EditPlace} options={{headerShown:false}}/>
+        <Stack.Screen name="MapLocator" component={MapLocator} options={{headerShown:false}}/>
+
+
+        <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
 
       </Stack.Navigator>
     </NavigationContainer>

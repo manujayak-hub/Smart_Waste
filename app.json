@@ -12,16 +12,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses your location.",
+        "GMSApiKey": "AIzaSyADfLlJvc3q9pNkqlb9HbMAQWpW3d2kS90"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyADfLlJvc3q9pNkqlb9HbMAQWpW3d2kS90"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
     }
+  
+    
   }
 }

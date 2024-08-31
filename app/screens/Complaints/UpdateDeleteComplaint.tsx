@@ -36,12 +36,15 @@ const UpdateDeleteComplaint: React.FC = () => {
   }, []);
 
   const handleUpdate = async () => {
-    if (updatedComplaint) {
-      const { id, ...rest } = updatedComplaint;
+    if (updatedComplaint && selectedComplaint) {
+      const { id } = selectedComplaint;
+      const { fullName, additionalDetails } = updatedComplaint;
       try {
         const complaintDoc = doc(FIREBASE_DB, 'Complaints', id);
-        await updateDoc(complaintDoc, rest);
-        setComplaints(prevComplaints => prevComplaints.map(complaint => complaint.id === id ? updatedComplaint : complaint));
+        await updateDoc(complaintDoc, { fullName, additionalDetails });
+        setComplaints(prevComplaints => prevComplaints.map(complaint => 
+          complaint.id === id ? { ...complaint, fullName, additionalDetails } : complaint
+        ));
         setModalVisible(false);
         Alert.alert('Success', 'Complaint updated successfully!');
       } catch (error) {
@@ -111,30 +114,6 @@ const UpdateDeleteComplaint: React.FC = () => {
                 placeholder="Full Name"
                 value={updatedComplaint.fullName}
                 onChangeText={text => setUpdatedComplaint({ ...updatedComplaint, fullName: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Complaint Type"
-                value={updatedComplaint.complaintType}
-                onChangeText={text => setUpdatedComplaint({ ...updatedComplaint, complaintType: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Missed Pickup Date"
-                value={updatedComplaint.missedPickupDate}
-                onChangeText={text => setUpdatedComplaint({ ...updatedComplaint, missedPickupDate: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Garbage Type"
-                value={updatedComplaint.garbageType}
-                onChangeText={text => setUpdatedComplaint({ ...updatedComplaint, garbageType: text })}
-              />
-              <TextInput
-                style={styles.input}
-                placeholder="Garbage Location"
-                value={updatedComplaint.garbageLocation}
-                onChangeText={text => setUpdatedComplaint({ ...updatedComplaint, garbageLocation: text })}
               />
               <TextInput
                 style={styles.input}
