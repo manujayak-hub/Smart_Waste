@@ -7,13 +7,15 @@ import Header from '../../Components/HeaderAdmin';
 
 interface DriverDetail {
   id: string;
+  driverName: string;
   vehicleNumber: string;
   partnerName: string;
   vehicleType: string;
   capacity: string;
   collectingArea: string;
-  arrivalDate: string;
-  leavingDate: string;
+  arrivalTime: string;
+  leavingTime: string;
+  cdate: string;
 }
 
 const DDList: React.FC = () => {
@@ -39,16 +41,20 @@ const DDList: React.FC = () => {
       <View>
         <Text style={styles.title}>Driver Details</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
         {driverDetails.map((item) => (
           <View key={item.id} style={styles.card}>
+            <View style={styles.cardHeader}>
+              <Text style={styles.driverName}>{item.driverName}</Text>
+              <Text style={styles.cdate}>{new Date(item.cdate).toLocaleDateString()}</Text>
+            </View>
             <Text style={styles.cardTitle}>{item.vehicleNumber}</Text>
             <Text style={styles.cardText}>Partner Name: {item.partnerName}</Text>
             <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
             <Text style={styles.cardText}>Capacity: {item.capacity}</Text>
             <Text style={styles.cardText}>Collecting Area: {item.collectingArea}</Text>
-            <Text style={styles.cardText}>Leaving Time: {item.leavingDate}</Text>
-            <Text style={styles.cardText}>Arrival Time: {item.arrivalDate}</Text>
+            <Text style={styles.cardText}>Arrival Time: {item.arrivalTime}</Text>
+            <Text style={styles.cardText}>Leaving Time: {item.leavingTime}</Text>
           </View>
         ))}
       </ScrollView>
@@ -72,20 +78,36 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
   },
+  cardHeader: {
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  driverName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  cdate: {
+    fontSize: 14,
+    color: '#555',
+  },
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
   },
   cardText: {
     fontSize: 16,
     marginBottom: 5,
+    textAlign: 'center',
   },
   title: {
     marginTop: 10,
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#181818',
     textAlign: 'center',
   },
 });
