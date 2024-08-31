@@ -29,7 +29,7 @@ const LoginScreen: React.FC = () => {
             navigation.navigate('HomeDD', { user: userData });
         } else {
 
-            Alert.alert('Hello Customer');
+            Alert.alert('Hello  Customer');
             navigation.navigate('CustomerHome', { user: userData });
 
         }
