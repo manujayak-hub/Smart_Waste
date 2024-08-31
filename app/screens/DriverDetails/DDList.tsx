@@ -13,8 +13,8 @@ interface DriverDetail {
   vehicleType: string;
   capacity: string;
   collectingArea: string;
-  arrivalDate: string;
-  leavingDate: string;
+  arrivalTime: string;
+  leavingTime: string;
   cdate: string;
 }
 
@@ -41,7 +41,7 @@ const DDList: React.FC = () => {
       <View>
         <Text style={styles.title}>Driver Details</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer} showsVerticalScrollIndicator={false}>
         {driverDetails.map((item) => (
           <View key={item.id} style={styles.card}>
             <View style={styles.cardHeader}>
@@ -53,8 +53,8 @@ const DDList: React.FC = () => {
             <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
             <Text style={styles.cardText}>Capacity: {item.capacity}</Text>
             <Text style={styles.cardText}>Collecting Area: {item.collectingArea}</Text>
-            <Text style={styles.cardText}>Arrival Time: {item.arrivalDate}</Text>
-            <Text style={styles.cardText}>Leaving Time: {item.leavingDate}</Text>
+            <Text style={styles.cardText}>Arrival Time: {item.arrivalTime}</Text>
+            <Text style={styles.cardText}>Leaving Time: {item.leavingTime}</Text>
           </View>
         ))}
       </ScrollView>
