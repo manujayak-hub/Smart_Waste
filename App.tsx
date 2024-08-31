@@ -40,9 +40,6 @@ export default function App() {
         <Stack.Screen name="UpdateDeleteDD" component={UpdateDeleteDD} options={{headerShown:false}}/>
 
 
-        <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
-
-
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
 
         <Stack.Screen name="AddComplaint" component={AddComplaint} options={{headerShown:false}} />
@@ -59,6 +56,8 @@ export default function App() {
         <Stack.Screen name="EditPlace" component={EditPlace} options={{headerShown:false}}/>
         <Stack.Screen name="MapLocator" component={MapLocator} options={{headerShown:false}}/>
 
+
+        <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
 
       </Stack.Navigator>
     </NavigationContainer>
