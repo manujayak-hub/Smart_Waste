@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert , Linking} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert , Linking,SafeAreaView} from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import AdminNav from '../../Components/AdminNav';
 
 const PlaceView = ({ route }) => {
   const { id } = route.params; // Get the id from the navigation route params
@@ -61,8 +62,9 @@ const PlaceView = ({ route }) => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1}}>
     <ScrollView contentContainerStyle={styles.layoutgd}>
-      <Text style={styles.header}>Garbage View</Text>
+      <Text style={styles.header}>Garbage Location View</Text>
       <View style={styles.infoContainer}>
 
       
@@ -101,6 +103,8 @@ const PlaceView = ({ route }) => {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 

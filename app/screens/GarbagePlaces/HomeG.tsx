@@ -32,7 +32,7 @@ const HomeG = () => {
   }, []);
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={{ flex: 1}}>
     <ScrollView contentContainerStyle={styles.layout}>
       <Text style={styles.h1d}>Garbage Places</Text>
       <TextInput
