@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config'; // Import your Firebase configuration
 import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import required Firestore methods
+import AdminNav from '../../Components/AdminNav';
 
 const EditPlace = ({ route, navigation }) => {
   const { id } = route.params; // Get the id from the navigation route params
@@ -25,7 +26,7 @@ const EditPlace = ({ route, navigation }) => {
           setWasteType(data.wasteType);
           setCapacity(data.capacity);
           setContactPerson(data.contactPerson);
-          setPhoneNumber(data.phoneNumber)
+          setPhoneNumber(data.phoneNumber);
         } else {
           Alert.alert('Error', 'No such document!');
         }
@@ -44,6 +45,10 @@ const EditPlace = ({ route, navigation }) => {
       await updateDoc(garbagePlaceDoc, {
         locationName,
         address,
+        wasteType,
+        capacity,
+        contactPerson,
+        phoneNumber,
       });
       Alert.alert('Success', 'Garbage place updated successfully!');
       navigation.goBack(); // Navigate back to the previous screen
@@ -53,6 +58,7 @@ const EditPlace = ({ route, navigation }) => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1}}>
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Edit Location Details</Text>
       <View style={styles.frame}>
@@ -72,31 +78,33 @@ const EditPlace = ({ route, navigation }) => {
       <TextInput
         style={styles.input}
         value={wasteType}
-        onChangeText={setAddress}
+        onChangeText={setWasteType}
       />
       <Text style={styles.label}>Capacity</Text>
       <TextInput
         style={styles.input}
         value={capacity}
-        onChangeText={setAddress}
+        onChangeText={setCapacity}
       />
       <Text style={styles.label}>Contact Person</Text>
       <TextInput
         style={styles.input}
         value={contactPerson}
-        onChangeText={setAddress}
+        onChangeText={setContactPerson}
       />
       <Text style={styles.label}>Contact Number</Text>
       <TextInput
         style={styles.input}
         value={phoneNumber}
-        onChangeText={setAddress}
+        onChangeText={setPhoneNumber}
       />
       </View>
       <TouchableOpacity style={styles.btn} onPress={handleSubmit}>
         <Text style={styles.btnText}>Submit</Text>
       </TouchableOpacity>
     </ScrollView>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 
