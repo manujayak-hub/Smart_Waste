@@ -74,6 +74,7 @@ const UpdateDeleteDD: React.FC = () => {
               <Text style={styles.cardDate}>{new Date(item.cdate).toLocaleDateString()}</Text>
             </View>
             <Text style={styles.cardTitle}>{item.vehicleNumber}</Text>
+            <Text style={styles.cardText}>Driver Name: {item.driverName}</Text>
             <Text style={styles.cardText}>Partner Name: {item.partnerName}</Text>
             <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
             <Text style={styles.cardText}>Capacity: {item.capacity}</Text>
@@ -120,6 +121,12 @@ const UpdateDeleteDD: React.FC = () => {
                 />
                 <TextInput
                   style={styles.input}
+                  placeholder="Driver Name"
+                  value={updatedDetail.driverName}
+                  onChangeText={text => setUpdatedDetail({ ...updatedDetail, driverName: text })}
+                />
+                <TextInput
+                  style={styles.input}
                   placeholder="Partner Name"
                   value={updatedDetail.partnerName}
                   onChangeText={text => setUpdatedDetail({ ...updatedDetail, partnerName: text })}
@@ -132,7 +139,7 @@ const UpdateDeleteDD: React.FC = () => {
                 />
                 <TextInput
                   style={styles.input}
-                  placeholder="Capacity"
+                  placeholder="Capacity (in Tons)"
                   value={updatedDetail.capacity}
                   onChangeText={text => setUpdatedDetail({ ...updatedDetail, capacity: text })}
                 />

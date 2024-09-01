@@ -51,7 +51,7 @@ const DDList: React.FC = () => {
             <Text style={styles.cardTitle}>{item.vehicleNumber}</Text>
             <Text style={styles.cardText}>Partner Name: {item.partnerName}</Text>
             <Text style={styles.cardText}>Vehicle Type: {item.vehicleType}</Text>
-            <Text style={styles.cardText}>Capacity: {item.capacity}</Text>
+            <Text style={styles.cardText}>Capacity: {item.capacity} Tons</Text>
             <Text style={styles.cardText}>Collecting Area: {item.collectingArea}</Text>
             <Text style={styles.cardText}>Arrival Time: {item.arrivalTime}</Text>
             <Text style={styles.cardText}>Leaving Time: {item.leavingTime}</Text>
