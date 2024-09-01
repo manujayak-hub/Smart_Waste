@@ -88,6 +88,7 @@ const AddDriverDetails = () => {
           Current Date: {cdate.toLocaleDateString()}
         </Text>
         <Text style={styles.formtitle}>Driver Name</Text>
+        
         <TextInput
           value={driverName}
           onChangeText={setDriverName}

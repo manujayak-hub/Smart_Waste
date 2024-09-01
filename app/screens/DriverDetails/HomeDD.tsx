@@ -9,6 +9,7 @@ const hero = require('../../../assets/hero.jpg')
 const add = require('../../../assets/add.png')
 const edit = require('../../../assets/edit.png')
 const list = require('../../../assets/list.png')
+const adduser = require('../../../assets/adduser.png')
 
 const HomeDD = () => {
   const navigation:any = useNavigation();
@@ -50,11 +51,16 @@ const HomeDD = () => {
               source={edit}
               style={styles.buttonImage}
             />
-
-          
-
             <Text style={styles.buttonText}>Update & Delete Records</Text>
           </TouchableOpacity>  
+
+          <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('SignUpScreen')}>
+            <Image
+              source={adduser}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Create User</Text>
+          </TouchableOpacity> 
           
 
         </View>
