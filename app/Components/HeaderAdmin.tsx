@@ -9,7 +9,7 @@ const HeaderAdmin :React.FC = () => {
   return (
   
   <SafeAreaView >
-    <StatusBar backgroundColor="#89F28D" barStyle="light-content" />
+    <StatusBar backgroundColor="#000000" barStyle="light-content" />
    
     
   </SafeAreaView>
