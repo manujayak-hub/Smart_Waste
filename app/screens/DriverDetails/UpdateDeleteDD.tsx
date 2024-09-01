@@ -62,7 +62,7 @@ const UpdateDeleteDD: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#89F28D' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#E8F5E9' }}>
       <Header />
       <View>
         <Text style={styles.title}>Change Record</Text>
