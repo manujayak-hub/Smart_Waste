@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert,
 import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import AdminNav from '../../Components/AdminNav';
 
 const HomeG = () => {
   const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string }[]>([]);
@@ -54,6 +55,7 @@ const HomeG = () => {
         ))}
       </View>
     </ScrollView>
+    <AdminNav/>
     </SafeAreaView>
   );
 };
