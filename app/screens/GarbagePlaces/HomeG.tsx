@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert,SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import AdminNav from '../../Components/AdminNav';
 
 const HomeG = () => {
   const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string }[]>([]);
@@ -31,6 +32,7 @@ const HomeG = () => {
   }, []);
 
   return (
+    <SafeAreaView style={{ flex: 1}}>
     <ScrollView contentContainerStyle={styles.layout}>
       <Text style={styles.h1d}>Garbage Places</Text>
       <TextInput
@@ -53,6 +55,8 @@ const HomeG = () => {
         ))}
       </View>
     </ScrollView>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 

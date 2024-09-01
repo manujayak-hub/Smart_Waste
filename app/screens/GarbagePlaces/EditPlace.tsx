@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert,SafeAreaView } from 'react-native';
 import { FIREBASE_DB } from '../../../Firebase_Config'; // Import your Firebase configuration
 import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import required Firestore methods
+import AdminNav from '../../Components/AdminNav';
 
 const EditPlace = ({ route, navigation }) => {
   const { id } = route.params; // Get the id from the navigation route params
@@ -53,6 +54,7 @@ const EditPlace = ({ route, navigation }) => {
   };
 
   return (
+    <SafeAreaView style={{ flex: 1}}>
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Edit Location Details</Text>
       <View style={styles.frame}>
@@ -97,6 +99,8 @@ const EditPlace = ({ route, navigation }) => {
         <Text style={styles.btnText}>Submit</Text>
       </TouchableOpacity>
     </ScrollView>
+    <AdminNav/>
+    </SafeAreaView>
   );
 };
 
