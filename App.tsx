@@ -62,7 +62,6 @@ export default function App() {
         <Stack.Screen name="MapLocator" component={MapLocator} options={{headerShown:false}}/>
 
 
-        <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
 
       </Stack.Navigator>
     </NavigationContainer>
