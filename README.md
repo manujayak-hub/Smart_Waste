@@ -76,8 +76,8 @@ Open the Expo Go app on your mobile device and scan the QR code to run the app.
 
 1. Create a new project in [Firebase](https://console.firebase.google.com/).
 2. Enable **Firebase Authentication**, **Cloud Firestore**, and **Storage**.
-3.Get your Firebase configuration details (API key, Auth domain, etc.) from the Firebase console.
-4.Create Firebase_Config.ts File in Your project in the `smart-waste-system/Firebase_Config.ts`
+3. Get your Firebase configuration details (API key, Auth domain, etc.) from the Firebase console.
+4. Create Firebase_Config.ts File in Your project in the `smart-waste-system/Firebase_Config.ts`
 Replace the placeholders with your actual Firebase configuration keys:
 
 ```
