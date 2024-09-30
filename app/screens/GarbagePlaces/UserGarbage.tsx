@@ -3,10 +3,10 @@ import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAr
 import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, onSnapshot } from 'firebase/firestore';
-import AdminNav from '../../Components/AdminNav';
+import CustomerNav from '../../Components/CustomerNav';
 
 
-const HomeG = () => {
+const UserGarbage = () => {
   const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string; capacity:string;contactPerson:string;phoneNumber:string;wasteType:string; }[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<{ id: string; locationName: string; address: string }[]>([]);
   const [searchText, setSearchText] = useState('');
@@ -47,10 +47,7 @@ const HomeG = () => {
     }
   };
 
-  const handleGenerateReport = () => {
-    // Navigate to the ReportDetails page, passing the garbage places data
-    navigation.navigate('ReportDetails', { garbagePlaces: garbagePlaces });
-  };
+  
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -62,13 +59,9 @@ const HomeG = () => {
           value={searchText}
           onChangeText={handleSearch} // Filter places based on search input
         />
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('AddGarbagePlace')}>
-          <Text style={styles.btntxt}>Add Garbage Place</Text>
-        </TouchableOpacity>
+        
 
-        <TouchableOpacity style={styles.reportBtn} onPress={handleGenerateReport}>
-          <Text style={styles.btntxt}>Generate Report</Text>
-        </TouchableOpacity>
+       
         
         <Text style={styles.subd}>Garbage Disposal Places</Text>
         <View style={styles.mainframe}>
@@ -90,12 +83,12 @@ const HomeG = () => {
           )}
         </View>
       </ScrollView>
-      <AdminNav />
+      <CustomerNav />
     </SafeAreaView>
   );
 };
 
-export default HomeG;
+export default UserGarbage;
 
 const styles = StyleSheet.create({
   layout: {
