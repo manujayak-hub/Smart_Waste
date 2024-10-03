@@ -216,7 +216,7 @@ const ComplaintReport: React.FC = () => {
               <Text style={styles.statusText}>Status: {selectedComplaint.status}</Text>
 
               <TouchableOpacity onPress={generatePDF} style={styles.pdfButton}>
-                <Text style={styles.pdfButtonText}>Generate PDF</Text>
+                <Text style={styles.pdfButtonText}>Download PDF</Text>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
