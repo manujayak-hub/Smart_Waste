@@ -17,6 +17,9 @@ import HomeG from './app/screens/GarbagePlaces/HomeG';
 import PlaceView from './app/screens/GarbagePlaces/PlaceView';
 import EditPlace from './app/screens/GarbagePlaces/EditPlace';
 import MapLocator from './app/screens/GarbagePlaces/MapLocator';
+import ReportDetails from './app/screens/GarbagePlaces/ReportDetails';
+import UserGarbage from './app/screens/GarbagePlaces/UserGarbage';
+import UserView from './app/screens/GarbagePlaces/UserView';
 
 import AddComplaint from './app/screens/Complaints/AddComplaint';
 import CustomerHome from './app/screens/Complaints/CustomerHome';
@@ -63,6 +66,11 @@ export default function App() {
         <Stack.Screen name="PlaceView" component={PlaceView} options={{headerShown:false}}/>
         <Stack.Screen name="EditPlace" component={EditPlace} options={{headerShown:false}}/>
         <Stack.Screen name="MapLocator" component={MapLocator} options={{headerShown:false}}/>
+        <Stack.Screen name="ReportDetails" component={ReportDetails} options={{headerShown:false}}/>
+        <Stack.Screen name="UserGarbage" component={UserGarbage} options={{headerShown:false}}/>
+        <Stack.Screen name="UserView" component={UserView} options={{headerShown:false}}/>
+
+
 
 
       </Stack.Navigator>
