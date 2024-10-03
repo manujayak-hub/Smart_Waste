@@ -30,10 +30,11 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
 
 
-Firebase_config.ts
+
 
