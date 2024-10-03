@@ -28,6 +28,7 @@ import UpdateDeleteComplaint from './app/screens/Complaints/UpdateDeleteComplain
 import AdminSideComplaint from './app/screens/Complaints/AdminSideComplaint';
 import ComplaintReport from './app/screens/Complaints/ComplaintReport';
 import LogIn from './app/screens/LogIn';
+import DisplayScreen from './app/screens/DisplayScreen';
 
 
 
@@ -48,6 +49,7 @@ export default function App() {
 
         <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Chatbot" component={Chatbot} options={{headerShown:false}}/>
+        <Stack.Screen name="DisplayScreen" component={DisplayScreen} options={{headerShown:false}}/>
 
 
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
