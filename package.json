@@ -33,6 +33,7 @@
     "firebase": "^10.13.0",
     "react": "18.2.0",
     "react-native": "0.74.5",
+    "react-native-dotenv": "^3.4.11",
     "react-native-file-viewer": "^2.1.5",
     "react-native-html-to-pdf": "^0.12.0",
     "react-native-maps": "1.14.0",
