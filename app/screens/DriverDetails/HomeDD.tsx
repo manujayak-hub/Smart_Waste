@@ -15,7 +15,7 @@ const HomeDD = () => {
   const navigation:any = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1,backgroundColor:'#89F28D' }}>
+    <SafeAreaView style={{ flex: 1,backgroundColor:'#E8F5E9' }}>
         <Header/>
       <ScrollView style={{ flex: 1, margin: 20 }} showsVerticalScrollIndicator={false}>
        <View >
