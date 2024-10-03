@@ -78,7 +78,7 @@ const AddDriverDetails = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#89F28D" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#E8F5E9" }}>
       <Header />
       <View>
         <Text style={styles.title}>Add New Record</Text>
@@ -88,6 +88,7 @@ const AddDriverDetails = () => {
           Current Date: {cdate.toLocaleDateString()}
         </Text>
         <Text style={styles.formtitle}>Driver Name</Text>
+        
         <TextInput
           value={driverName}
           onChangeText={setDriverName}

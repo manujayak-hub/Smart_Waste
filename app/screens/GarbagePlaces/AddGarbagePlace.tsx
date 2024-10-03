@@ -1,8 +1,9 @@
-import { ScrollView, StyleSheet, Text, TextInput, View ,Alert, TouchableOpacity} from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View ,Alert, TouchableOpacity,SafeAreaView} from 'react-native'
 import React, { useState } from 'react';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { addDoc, collection } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import AdminNav from '../../Components/AdminNav';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -83,6 +84,7 @@ const AddGarbagePlace = () => {
     };
   
     return (
+      <SafeAreaView style={{ flex: 1}}>
       <ScrollView contentContainerStyle={styles.layoutd}>
         <Text style={styles.header}>Add New Garbage Location</Text>
         <View style={styles.frame}>
@@ -136,6 +138,8 @@ const AddGarbagePlace = () => {
 
         
       </ScrollView>
+      <AdminNav/>
+      </SafeAreaView>
     )
   }
   

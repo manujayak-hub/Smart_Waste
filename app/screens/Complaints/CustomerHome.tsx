@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomerNav from '../../Components/CustomerNav';
 
@@ -7,6 +7,7 @@ const hero = require('../../../assets/homeHero.jpg');
 const add = require('../../../assets/add.png');
 const edit = require('../../../assets/edit.png');
 const list = require('../../../assets/list.png');
+const bin = require('../../../assets/nav (2).png');
 
 const CustomerHome: React.FC = () => {
   const navigation = useNavigation<any>(); // You can replace 'any' with specific type if needed
@@ -15,6 +16,7 @@ const CustomerHome: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
         <Image source={hero} style={styles.topImage} />
+        <ScrollView>
         <View style={styles.gridContainer}>
           <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('AddComplaint')}>
             <Image source={add} style={styles.buttonImage} />
@@ -30,7 +32,13 @@ const CustomerHome: React.FC = () => {
             <Image source={edit} style={styles.buttonImage} />
             <Text style={styles.buttonText}>Manage Complaints</Text>
           </TouchableOpacity>
+
+          <TouchableOpacity style={styles.gridItem} onPress={() => navigation.navigate('UserGarbage')}>
+            <Image source={bin} style={styles.buttonImage} />
+            <Text style={styles.buttonText}>View Garbage Places</Text>
+          </TouchableOpacity>
         </View>
+        </ScrollView>
       </View>
       <CustomerNav />
     </SafeAreaView>
@@ -40,7 +48,7 @@ const CustomerHome: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#89F28D',
+    backgroundColor:'#E8F5E9',
   },
   innerContainer: {
     flex: 1,

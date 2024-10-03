@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert , Linking,S
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-import AdminNav from '../../Components/AdminNav';
+import CustomerNav from '../../Components/CustomerNav';
 
-const PlaceView = ({ route }) => {
+const UserView = ({ route }) => {
   const { id } = route.params; // Get the id from the navigation route params
   const [garbagePlace, setGarbagePlace] = useState(null);
   const navigation:any = useNavigation();
@@ -33,16 +33,7 @@ const PlaceView = ({ route }) => {
     }, [fetchGarbagePlace])
   );
 
-  const handleDelete = async () => {
-    try {
-      const docRef = doc(FIREBASE_DB, 'GarbagePlaces', id);
-      await deleteDoc(docRef);
-      Alert.alert('Success', 'Garbage place deleted successfully!');
-      navigation.navigate('HomeG'); // Navigate to the home page after deletion
-    } catch (error) {
-      Alert.alert('Error', 'Error deleting garbage place: ' + error.message);
-    }
-  };
+  
 
   if (!garbagePlace) {
     return (
@@ -94,21 +85,14 @@ const PlaceView = ({ route }) => {
         <View style={styles.vf}>
         <Text style={styles.value}>{garbagePlace.phoneNumber}</Text></View>
         </View>
-      <View style={styles.btnf}>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditPlace', { id })}>
-          <Text style={styles.btnt}>Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={handleDelete}>
-          <Text style={styles.btnt}>Delete</Text>
-        </TouchableOpacity>
-      </View>
+      
     </ScrollView>
-    <AdminNav/>
+    <CustomerNav />
     </SafeAreaView>
   );
 };
 
-export default PlaceView;
+export default UserView;
 
 const styles = StyleSheet.create({
   layoutgd: {

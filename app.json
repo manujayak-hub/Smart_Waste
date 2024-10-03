@@ -17,7 +17,12 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "permissions": [
+      "mediaLibrary",
+      "writeExternalStorage",
+      "readExternalStorage"
+    ]
     },
     "ios": {
       "supportsTablet": true,

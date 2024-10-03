@@ -33,6 +33,8 @@
     "expo-location": "~17.0.1",
     "expo-maps": "^0.4.1",
     "expo-media-library": "~16.0.4",
+    "expo-print": "^13.0.1",
+    "expo-sharing": "^12.0.1",
     "expo-speech": "~12.0.2",
     "expo-status-bar": "~1.12.1",
     "firebase": "^10.13.0",
