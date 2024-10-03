@@ -12,6 +12,7 @@ import UpdateDeleteDD from './app/screens/DriverDetails/UpdateDeleteDD';
 import CameradScreen from './app/screens/CameradScreen';
 import Chatbot from './app/screens/Chatbot';
 
+
 import AddGarbagePlace from './app/screens/GarbagePlaces/AddGarbagePlace';
 import HomeG from './app/screens/GarbagePlaces/HomeG';
 import PlaceView from './app/screens/GarbagePlaces/PlaceView';
@@ -24,6 +25,7 @@ import ComplaintList from './app/screens/Complaints/ComplaintList';
 import UpdateDeleteComplaint from './app/screens/Complaints/UpdateDeleteComplaint';
 import AdminSideComplaint from './app/screens/Complaints/AdminSideComplaint';
 import LogIn from './app/screens/LogIn';
+import DisplayScreen from './app/screens/DisplayScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +45,7 @@ export default function App() {
 
         <Stack.Screen name="CameradScreen" component={CameradScreen} options={{headerShown:false}}/>
         <Stack.Screen name="Chatbot" component={Chatbot} options={{headerShown:false}}/>
+        <Stack.Screen name="DisplayScreen" component={DisplayScreen} options={{headerShown:false}}/>
 
 
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
