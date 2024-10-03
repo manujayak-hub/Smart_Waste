@@ -26,7 +26,9 @@ import CustomerHome from './app/screens/Complaints/CustomerHome';
 import ComplaintList from './app/screens/Complaints/ComplaintList';
 import UpdateDeleteComplaint from './app/screens/Complaints/UpdateDeleteComplaint';
 import AdminSideComplaint from './app/screens/Complaints/AdminSideComplaint';
+import ComplaintReport from './app/screens/Complaints/ComplaintReport';
 import LogIn from './app/screens/LogIn';
+
 
 
 const Stack = createNativeStackNavigator();
@@ -55,6 +57,7 @@ export default function App() {
         <Stack.Screen name="ComplaintList" component={ComplaintList} options={{headerShown:false}} />
         <Stack.Screen name="UpdateDeleteComplaint" component={UpdateDeleteComplaint} options={{headerShown:false}} />
         <Stack.Screen name="AdminSideComplaint" component={AdminSideComplaint} options={{headerShown:false}} />
+        <Stack.Screen name="ComplaintReport" component={ComplaintReport} options={{headerShown:false}} />
 
         
 
