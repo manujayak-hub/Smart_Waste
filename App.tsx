@@ -20,6 +20,7 @@ import MapLocator from './app/screens/GarbagePlaces/MapLocator';
 import ReportDetails from './app/screens/GarbagePlaces/ReportDetails';
 import UserGarbage from './app/screens/GarbagePlaces/UserGarbage';
 import UserView from './app/screens/GarbagePlaces/UserView';
+import MainGarbage from './app/screens/GarbagePlaces/MainGarbage';
 
 import AddComplaint from './app/screens/Complaints/AddComplaint';
 import CustomerHome from './app/screens/Complaints/CustomerHome';
@@ -71,6 +72,7 @@ export default function App() {
         <Stack.Screen name="ReportDetails" component={ReportDetails} options={{headerShown:false}}/>
         <Stack.Screen name="UserGarbage" component={UserGarbage} options={{headerShown:false}}/>
         <Stack.Screen name="UserView" component={UserView} options={{headerShown:false}}/>
+        <Stack.Screen name="MainGarbage" component={MainGarbage} options={{headerShown:false}}/>
 
 
 
