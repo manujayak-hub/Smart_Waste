@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, onSnapshot } from 'firebase/firestore';
 import CustomerNav from '../../Components/CustomerNav';
+import Header from '../../Components/HeaderCustomer';
 
 
 const UserGarbage = () => {
@@ -51,28 +52,25 @@ const UserGarbage = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Header />
       <ScrollView contentContainerStyle={styles.layout}>
-        <Text style={styles.h1d}>Garbage Places</Text>
+        <Text style={styles.h1d}>Garbage Disposal Places</Text>
         <TextInput
           style={styles.search}
           placeholder="Search for garbage places by address"
           value={searchText}
           onChangeText={handleSearch} // Filter places based on search input
         />
-        
-
-       
-        
-        <Text style={styles.subd}>Garbage Disposal Places</Text>
+  
         <View style={styles.mainframe}>
           {filteredPlaces.length > 0 ? (
             filteredPlaces.map((place) => (
               <View key={place.id} style={styles.frame}>
-                <Text style={styles.ss1}>{place.locationName}</Text>
+
                 <Text style={styles.ss2}>{place.address}</Text>
                 <TouchableOpacity
                   style={styles.btn1}
-                  onPress={() => navigation.navigate('PlaceView', { id: place.id })}
+                  onPress={() => navigation.navigate('UserView', { id: place.id })}
                 >
                   <Text style={styles.btntxt1}>View</Text>
                 </TouchableOpacity>
@@ -136,10 +134,11 @@ const styles = StyleSheet.create({
   },
   mainframe: {
     flexGrow: 1,
+    
   },
   frame: {
     width: '100%',
-    height: 132,
+    height: 50,
     backgroundColor: '#C2E0C0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
@@ -147,8 +146,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     borderRadius: 12,
     padding: 10,
+    marginTop:2,
     marginBottom: 20,
     justifyContent: 'space-between',
+    flexDirection: 'row',
   },
   btn1: {
     width: 56.95,
@@ -158,6 +159,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
+    marginTop:5,
+   
   },
   btntxt1: {
     fontWeight: '500',

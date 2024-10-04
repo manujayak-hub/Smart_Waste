@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CustomerNav from '../../Components/CustomerNav';
+import Header from '../../Components/HeaderCustomer';
+
 
 const hero = require('../../../assets/homeHero.jpg');
 const add = require('../../../assets/add.png');
@@ -14,6 +16,7 @@ const CustomerHome: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+       <Header />
       <View style={styles.innerContainer}>
         <Image source={hero} style={styles.topImage} />
         <ScrollView>

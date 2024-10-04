@@ -4,6 +4,8 @@ import { FIREBASE_DB } from '../../../Firebase_Config';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AdminNav from '../../Components/AdminNav';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Header from '../../Components/HeaderAdmin';
 
 const PlaceView = ({ route }) => {
   const { id } = route.params; // Get the id from the navigation route params
@@ -63,6 +65,7 @@ const PlaceView = ({ route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1}}>
+      <Header/>
     <ScrollView contentContainerStyle={styles.layoutgd}>
       <Text style={styles.header}>Garbage Location View</Text>
       <View style={styles.infoContainer}>
@@ -77,7 +80,9 @@ const PlaceView = ({ route }) => {
         <View style={styles.vf}>
         <Text style={styles.value}>{garbagePlace.address}</Text>
         </View>
-        <TouchableOpacity style={styles.btnl} onPress={openInGoogleMaps}><Text style={styles.btnt}>View on Map</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.btnl} onPress={openInGoogleMaps}>
+          <Text style={styles.btnt}>View on Map</Text>
+        </TouchableOpacity>
       
      
         <Text style={styles.label}>Capacity:</Text>
@@ -95,11 +100,13 @@ const PlaceView = ({ route }) => {
         <Text style={styles.value}>{garbagePlace.phoneNumber}</Text></View>
         </View>
       <View style={styles.btnf}>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('EditPlace', { id })}>
-          <Text style={styles.btnt}>Edit</Text>
+        <TouchableOpacity style={styles.btne} onPress={() => navigation.navigate('EditPlace', { id })}>
+        <Icon name="edit" size={20} color="#fff" style={styles.icon} />
+          <Text style={styles.btnd}>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btn} onPress={handleDelete}>
-          <Text style={styles.btnt}>Delete</Text>
+        <Icon name="delete" size={20} color="#fff" style={styles.icon} />
+          <Text style={styles.btnd}>Delete</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -120,6 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 22,
     marginBottom: 20,
+    textAlign:'center',
   },
   infoContainer: {
       width: '100%',
@@ -157,7 +165,16 @@ const styles = StyleSheet.create({
     width:'40%',
     height: 50,
     borderRadius:10,
-    backgroundColor:'#151515',
+    backgroundColor:'#28A745',
+    flexDirection: 'row',
+
+  },
+  btne:{
+    width:'40%',
+    height: 50,
+    borderRadius:10,
+    backgroundColor:'#28A745',
+    flexDirection: 'row',
 
   },
 
@@ -188,8 +205,19 @@ const styles = StyleSheet.create({
     width:'40%',
     height: 50,
     borderRadius:10,
-    backgroundColor:'#151515',
+    backgroundColor:'#28A745',
     marginBottom:20,
-    marginLeft:40,
+    marginLeft:100,
+  },
+  icon: {
+    marginLeft: 20,
+    padding:10,
+  },
+  btnd:{
+    fontSize:15,
+    color:'#FFFFFF',
+    textAlign:'center',
+   marginLeft:4,
+   marginTop:10,
   },
 });
