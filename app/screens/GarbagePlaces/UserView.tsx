@@ -4,6 +4,7 @@ import { FIREBASE_DB } from '../../../Firebase_Config';
 import { doc, getDoc, deleteDoc } from 'firebase/firestore';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import CustomerNav from '../../Components/CustomerNav';
+import Header from '../../Components/HeaderCustomer';
 
 const UserView = ({ route }) => {
   const { id } = route.params; // Get the id from the navigation route params
@@ -54,15 +55,13 @@ const UserView = ({ route }) => {
 
   return (
     <SafeAreaView style={{ flex: 1}}>
+      <Header />
     <ScrollView contentContainerStyle={styles.layoutgd}>
       <Text style={styles.header}>Garbage Location View</Text>
       <View style={styles.infoContainer}>
 
       
-        <Text style={styles.label}>Location Name:</Text>
-        <View style={styles.vf}>
-        <Text style={styles.value}>{garbagePlace.locationName}</Text>
-        </View>
+        
       
         <Text style={styles.label}>Address:</Text>
         <View style={styles.vf}>
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
       width: '100%',
-      height:600,
+      height:500,
       backgroundColor: '#C2E0C0',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 0 },
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
       padding: 10,
       marginBottom: 20,
       justifyContent: 'space-between',
+      flexDirection:'column',
   },
 
   infoc:{
@@ -172,8 +172,8 @@ const styles = StyleSheet.create({
     width:'40%',
     height: 50,
     borderRadius:10,
-    backgroundColor:'#151515',
+    backgroundColor:'#28A745',
     marginBottom:20,
-    marginLeft:40,
+    marginLeft:100,
   },
 });
