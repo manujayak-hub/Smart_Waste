@@ -12,7 +12,6 @@ const PlaceView = ({ route }) => {
   const [garbagePlace, setGarbagePlace] = useState(null);
   const navigation:any = useNavigation();
 
- 
 
   // Fetch the garbage place details from Firestore
   const fetchGarbagePlace = useCallback(async () => {
@@ -40,7 +39,7 @@ const PlaceView = ({ route }) => {
       const docRef = doc(FIREBASE_DB, 'GarbagePlaces', id);
       await deleteDoc(docRef);
       Alert.alert('Success', 'Garbage place deleted successfully!');
-      navigation.navigate('HomeG'); // Navigate to the home page after deletion
+      navigation.navigate('HomeG'); 
     } catch (error) {
       Alert.alert('Error', 'Error deleting garbage place: ' + error.message);
     }
