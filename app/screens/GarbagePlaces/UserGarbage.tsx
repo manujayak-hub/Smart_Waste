@@ -161,12 +161,13 @@ const styles = StyleSheet.create({
   },
   locationBtn: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignSelf:'center',
     backgroundColor: '#28A745',
     borderRadius: 10,
     padding: 10,
     marginBottom: 20,
     justifyContent: 'center',
+    width:200,
   },
   locationBtnText: {
     color: '#fff',
