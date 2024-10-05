@@ -23,7 +23,7 @@ const HomeG = () => {
             ...doc.data() as { locationName: string; address: string; capacity:string;contactPerson:string;phoneNumber:string;wasteType:string },
           }));
           setGarbagePlaces(placesData);
-          setFilteredPlaces(placesData); // Set initial filtered places to all places
+          setFilteredPlaces(placesData); 
         });
 
         return () => unsubscribe();
@@ -35,11 +35,11 @@ const HomeG = () => {
     fetchGarbagePlaces();
   }, []);
 
-  // Function to filter places by search text (address)
+  // Function to filter places by address
   const handleSearch = (text: string) => {
     setSearchText(text);
     if (text === '') {
-      setFilteredPlaces(garbagePlaces); // If search is empty, show all places
+      setFilteredPlaces(garbagePlaces); 
     } else {
       const filtered = garbagePlaces.filter((place) =>
         place.address.toLowerCase().includes(text.toLowerCase())
@@ -58,7 +58,7 @@ const HomeG = () => {
           style={styles.search}
           placeholder="Search for garbage places by address"
           value={searchText}
-          onChangeText={handleSearch} // Filter places based on search input
+          onChangeText={handleSearch} 
         />
        
         <View style={styles.mainframe}>

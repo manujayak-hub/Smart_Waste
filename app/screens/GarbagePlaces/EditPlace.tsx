@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
-import { FIREBASE_DB } from '../../../Firebase_Config'; // Import your Firebase configuration
-import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import required Firestore methods
+import { FIREBASE_DB } from '../../../Firebase_Config'; 
+import { doc, getDoc, updateDoc } from 'firebase/firestore'; 
 import AdminNav from '../../Components/AdminNav';
 import Header from '../../Components/HeaderAdmin';
 
@@ -52,7 +52,7 @@ const EditPlace = ({ route, navigation }) => {
         phoneNumber,
       });
       Alert.alert('Success', 'Garbage place updated successfully!');
-      navigation.goBack(); // Navigate back to the previous screen
+      navigation.goBack(); 
     } catch (error) {
       Alert.alert('Error', 'Error updating garbage place: ' + error.message);
     }

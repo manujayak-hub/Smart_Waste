@@ -9,7 +9,7 @@ import Header from '../../Components/HeaderAdmin';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
-  HomeG: undefined; // You can define parameters if needed
+  HomeG: undefined; 
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeG'>;
@@ -77,7 +77,7 @@ const AddGarbagePlace = () => {
         setContactPerson('');
         setPhoneNumber('');
         Alert.alert('Success', 'Place added successfully!');
-        navigation.navigate('HomeG'); // Navigate to HomeG after success
+        navigation.navigate('HomeG'); 
       } catch (error) {
         console.error('Error adding place: ', error);
         Alert.alert('Error', 'Failed to add place. Please try again.');

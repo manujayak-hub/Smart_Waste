@@ -11,7 +11,6 @@ const UserView = ({ route }) => {
   const [garbagePlace, setGarbagePlace] = useState(null);
   const navigation:any = useNavigation();
 
- 
 
   // Fetch the garbage place details from Firestore
   const fetchGarbagePlace = useCallback(async () => {
@@ -153,8 +152,8 @@ const styles = StyleSheet.create({
   },
   
   btnf:{
-    flexDirection: 'row',         // Align children in a row
-    justifyContent: 'space-between', // Space out the buttons evenly
+    flexDirection: 'row',         
+    justifyContent: 'space-between', 
     padding: 10, 
   },
 
