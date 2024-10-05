@@ -6,6 +6,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import CustomerNav from '../../Components/CustomerNav';
 import Header from '../../Components/HeaderCustomer';
 import * as Location from 'expo-location';
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Icon
 
 const UserGarbage = () => {
   const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string; capacity: string; contactPerson: string; phoneNumber: string; wasteType: string; latitude: number; longitude: number }[]>([]);
@@ -106,6 +107,7 @@ const UserGarbage = () => {
 
         {/* Button to fetch user's current location */}
         <TouchableOpacity style={styles.locationBtn} onPress={fetchCurrentLocation}>
+          <Icon name="location-on" size={20} color="#fff" style={styles.iconStyle} />
           <Text style={styles.locationBtnText}>Use My Location</Text>
         </TouchableOpacity>
 
@@ -113,7 +115,6 @@ const UserGarbage = () => {
           {filteredPlaces.length > 0 ? (
             filteredPlaces.map((place) => (
               <View key={place.id} style={styles.frame}>
-
                 <Text style={styles.ss2}>{place.address}</Text>
                 <TouchableOpacity
                   style={styles.btn1}
@@ -159,17 +160,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   locationBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: '#4CAF50',
     borderRadius: 10,
     padding: 10,
     marginBottom: 20,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   locationBtnText: {
     color: '#fff',
     fontWeight: '600',
     fontSize: 16,
+    marginLeft: 5, // Space between icon and text
+  },
+  iconStyle: {
+    marginRight: 10,
   },
   mainframe: {
     flexGrow: 1,
