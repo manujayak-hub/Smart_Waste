@@ -105,7 +105,7 @@ const UserGarbage = () => {
           onChangeText={handleSearch} // Filter places based on search input
         />
 
-        {/* Button to fetch user's current location */}
+        
         <TouchableOpacity style={styles.locationBtn} onPress={fetchCurrentLocation}>
           <Icon name="location-on" size={20} color="#fff" style={styles.iconStyle} />
           <Text style={styles.locationBtnText}>Use My Location</Text>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   locationBtn: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#28A745',
     borderRadius: 10,
     padding: 10,
     marginBottom: 20,
