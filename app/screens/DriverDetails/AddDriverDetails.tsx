@@ -36,19 +36,43 @@ const AddDriverDetails = () => {
   };
 
   const handleAddItem = async () => {
-    if (
-      !driverName.trim() ||
-      !vehicleNumber.trim() ||
-      !partnerName.trim() ||
-      !vehicleType.trim() ||
-      !capacity.trim() ||
-      !collectingArea.trim() ||
-      !arrivalTime.trim() ||
-      !leavingTime.trim()
-    ) {
+    // Basic validation regex
+    const namePattern = /^[a-zA-Z\s]+$/;  // Only letters and spaces
+    
+    if (!driverName.trim() || !namePattern.test(driverName)) {
+      alert("Please enter a valid driver name (letters only).");
       return;
     }
-
+    if (!vehicleNumber.trim() ) {
+      alert("Please enter a valid vehicle number (up to 9 alphanumeric characters).");
+      return;
+    }
+    if (!partnerName.trim() || !namePattern.test(partnerName)) {
+      alert("Please enter a valid partner name (letters only).");
+      return;
+    }
+    if (!vehicleType.trim()) {
+      alert("Please enter the vehicle type.");
+      return;
+    }
+    if (!capacity.trim() || isNaN(Number(capacity)) || Number(capacity) <= 0 || Number(capacity) > 99) {
+      alert("Please enter a valid capacity (1-99 tons).");
+      return;
+    }
+    if (!collectingArea.trim()) {
+      alert("Please enter the collecting area.");
+      return;
+    }
+    if (!arrivalTime.trim()) {
+      alert("Please set the arrival time.");
+      return;
+    }
+    if (!leavingTime.trim()) {
+      alert("Please set the leaving time.");
+      return;
+    }
+  
+    // If all validations pass, proceed with adding the record
     try {
       await addDoc(collection(FIREBASE_DB, "DriverDetails"), {
         driverName,
@@ -57,11 +81,12 @@ const AddDriverDetails = () => {
         vehicleType,
         capacity,
         collectingArea,
-        arrivalTime:arrivalTime.toString(),
-        leavingTime:leavingTime.toString(),
+        arrivalTime: arrivalTime.toString(),
+        leavingTime: leavingTime.toString(),
         cdate: cdate.toISOString(), // Store date in ISO format
       });
-
+  
+      // Clear fields after successful submission
       setDriverName("");
       setVehicleNumber("");
       setPartnerName("");
@@ -76,7 +101,7 @@ const AddDriverDetails = () => {
       alert("Failed to add record");
     }
   };
-
+  
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#E8F5E9" }}>
       <Header />
