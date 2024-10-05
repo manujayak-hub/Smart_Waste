@@ -6,7 +6,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import CustomerNav from '../../Components/CustomerNav';
 import Header from '../../Components/HeaderCustomer';
 import * as Location from 'expo-location';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Icon
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 const UserGarbage = () => {
   const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string; capacity: string; contactPerson: string; phoneNumber: string; wasteType: string; latitude: number; longitude: number }[]>([]);
@@ -24,7 +24,7 @@ const UserGarbage = () => {
             ...doc.data() as { locationName: string; address: string; capacity: string; contactPerson: string; phoneNumber: string; wasteType: string; latitude: number; longitude: number },
           }));
           setGarbagePlaces(placesData);
-          setFilteredPlaces(placesData); // Set initial filtered places to all places
+          setFilteredPlaces(placesData); 
         });
 
         return () => unsubscribe();
@@ -36,7 +36,7 @@ const UserGarbage = () => {
     fetchGarbagePlaces();
   }, []);
 
-  // Function to calculate distance between two coordinates using Haversine formula
+  
   const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     const R = 6371; // Radius of the earth in kilometers
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -49,7 +49,7 @@ const UserGarbage = () => {
     return distance;
   };
 
-  // Function to fetch user's current location and show nearby garbage places
+  
   const fetchCurrentLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== 'granted') {
@@ -61,30 +61,30 @@ const UserGarbage = () => {
     if (location) {
       const { latitude, longitude } = location.coords;
 
-      // Reverse geocode to get human-readable location (e.g., city or address)
+      
       const reverseGeocode = await Location.reverseGeocodeAsync({ latitude, longitude });
       if (reverseGeocode.length > 0) {
         const locationName = `${reverseGeocode[0].city}`;
-        setSearchText(locationName); // Set the location name in the search bar
+        setSearchText(locationName); 
 
-        // Filter nearby garbage places within 5 kilometers
+       
         const nearbyPlaces = garbagePlaces.filter((place) => {
           const distance = calculateDistance(latitude, longitude, place.latitude, place.longitude);
           return distance <= 5; // Show places within 5 kilometers
         });
 
-        setFilteredPlaces(nearbyPlaces); // Set the nearby places
+        setFilteredPlaces(nearbyPlaces); 
       } else {
         Alert.alert('Location Error', 'Unable to fetch location details');
       }
     }
   };
 
-  // Function to filter places by search text (address)
+  
   const handleSearch = (text: string) => {
     setSearchText(text);
     if (text === '') {
-      setFilteredPlaces(garbagePlaces); // If search is empty, show all places
+      setFilteredPlaces(garbagePlaces); 
     } else {
       const filtered = garbagePlaces.filter((place) =>
         place.address.toLowerCase().includes(text.toLowerCase())
@@ -102,7 +102,7 @@ const UserGarbage = () => {
           style={styles.search}
           placeholder="Search for garbage places by address"
           value={searchText}
-          onChangeText={handleSearch} // Filter places based on search input
+          onChangeText={handleSearch} 
         />
 
         
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
     fontSize: 16,
-    marginLeft: 5, // Space between icon and text
+    marginLeft: 5, 
   },
   iconStyle: {
     marginRight: 10,
