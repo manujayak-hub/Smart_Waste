@@ -56,29 +56,32 @@ const UserGarbage = () => {
       Alert.alert('Permission Denied', 'Permission to access location was denied.');
       return;
     }
-
+  
     let location = await Location.getCurrentPositionAsync({});
     if (location) {
       const { latitude, longitude } = location.coords;
-
-      
+  
       const reverseGeocode = await Location.reverseGeocodeAsync({ latitude, longitude });
       if (reverseGeocode.length > 0) {
         const locationName = `${reverseGeocode[0].city}`;
-        setSearchText(locationName); 
-
-       
-        const nearbyPlaces = garbagePlaces.filter((place) => {
-          const distance = calculateDistance(latitude, longitude, place.latitude, place.longitude);
-          return distance <= 5; // Show places within 5 kilometers
-        });
-
-        setFilteredPlaces(nearbyPlaces); 
+        setSearchText(locationName);
+  
+        // Filter garbage places where the address includes the location name (city or region)
+        const matchingPlaces = garbagePlaces.filter((place) =>
+          place.address.toLowerCase().includes(locationName.toLowerCase())
+        );
+  
+        if (matchingPlaces.length > 0) {
+          setFilteredPlaces(matchingPlaces);
+        } else {
+          Alert.alert('No Matches', 'No garbage places found for your current location.');
+        }
       } else {
         Alert.alert('Location Error', 'Unable to fetch location details');
       }
     }
   };
+  
 
   
   const handleSearch = (text: string) => {
