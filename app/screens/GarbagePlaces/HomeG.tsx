@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, onSnapshot } from 'firebase/firestore';
 import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
 
 
 const HomeG = () => {
@@ -22,7 +23,7 @@ const HomeG = () => {
             ...doc.data() as { locationName: string; address: string; capacity:string;contactPerson:string;phoneNumber:string;wasteType:string },
           }));
           setGarbagePlaces(placesData);
-          setFilteredPlaces(placesData); // Set initial filtered places to all places
+          setFilteredPlaces(placesData); 
         });
 
         return () => unsubscribe();
@@ -34,11 +35,11 @@ const HomeG = () => {
     fetchGarbagePlaces();
   }, []);
 
-  // Function to filter places by search text (address)
+  // Function to filter places by address
   const handleSearch = (text: string) => {
     setSearchText(text);
     if (text === '') {
-      setFilteredPlaces(garbagePlaces); // If search is empty, show all places
+      setFilteredPlaces(garbagePlaces); 
     } else {
       const filtered = garbagePlaces.filter((place) =>
         place.address.toLowerCase().includes(text.toLowerCase())
@@ -47,30 +48,19 @@ const HomeG = () => {
     }
   };
 
-  const handleGenerateReport = () => {
-    // Navigate to the ReportDetails page, passing the garbage places data
-    navigation.navigate('ReportDetails', { garbagePlaces: garbagePlaces });
-  };
-
+  
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Header />
       <ScrollView contentContainerStyle={styles.layout}>
-        <Text style={styles.h1d}>Garbage Places</Text>
+        <Text style={styles.h1d}>Garbage Disposal Places</Text>
         <TextInput
           style={styles.search}
           placeholder="Search for garbage places by address"
           value={searchText}
-          onChangeText={handleSearch} // Filter places based on search input
+          onChangeText={handleSearch} 
         />
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('AddGarbagePlace')}>
-          <Text style={styles.btntxt}>Add Garbage Place</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.reportBtn} onPress={handleGenerateReport}>
-          <Text style={styles.btntxt}>Generate Report</Text>
-        </TouchableOpacity>
-        
-        <Text style={styles.subd}>Garbage Disposal Places</Text>
+       
         <View style={styles.mainframe}>
           {filteredPlaces.length > 0 ? (
             filteredPlaces.map((place) => (

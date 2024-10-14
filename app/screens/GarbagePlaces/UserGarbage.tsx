@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAreaView,Alert } from 'react-native';
+import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FIREBASE_DB } from '../../../Firebase_Config';
 import { collection, onSnapshot } from 'firebase/firestore';
 import CustomerNav from '../../Components/CustomerNav';
-
+import Header from '../../Components/HeaderCustomer';
+import * as Location from 'expo-location';
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
 
 const UserGarbage = () => {
-  const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string; capacity:string;contactPerson:string;phoneNumber:string;wasteType:string; }[]>([]);
+  const [garbagePlaces, setGarbagePlaces] = useState<{ id: string; locationName: string; address: string; capacity: string; contactPerson: string; phoneNumber: string; wasteType: string; latitude: number; longitude: number }[]>([]);
   const [filteredPlaces, setFilteredPlaces] = useState<{ id: string; locationName: string; address: string }[]>([]);
   const [searchText, setSearchText] = useState('');
   const navigation: any = useNavigation();
@@ -19,10 +21,10 @@ const UserGarbage = () => {
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
           const placesData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
-            ...doc.data() as { locationName: string; address: string; capacity:string;contactPerson:string;phoneNumber:string;wasteType:string },
+            ...doc.data() as { locationName: string; address: string; capacity: string; contactPerson: string; phoneNumber: string; wasteType: string; latitude: number; longitude: number },
           }));
           setGarbagePlaces(placesData);
-          setFilteredPlaces(placesData); // Set initial filtered places to all places
+          setFilteredPlaces(placesData); 
         });
 
         return () => unsubscribe();
@@ -34,11 +36,58 @@ const UserGarbage = () => {
     fetchGarbagePlaces();
   }, []);
 
-  // Function to filter places by search text (address)
+  
+  const calculateDistance = (lat1: number, lon1: number, lat2: number, lon2: number) => {
+    const R = 6371; // Radius of the earth in kilometers
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c; // Distance in kilometers
+    return distance;
+  };
+
+  
+  const fetchCurrentLocation = async () => {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('Permission Denied', 'Permission to access location was denied.');
+      return;
+    }
+  
+    let location = await Location.getCurrentPositionAsync({});
+    if (location) {
+      const { latitude, longitude } = location.coords;
+  
+      const reverseGeocode = await Location.reverseGeocodeAsync({ latitude, longitude });
+      if (reverseGeocode.length > 0) {
+        const locationName = `${reverseGeocode[0].city}`;
+        setSearchText(locationName);
+  
+        // Filter garbage places where the address includes the location name (city or region)
+        const matchingPlaces = garbagePlaces.filter((place) =>
+          place.address.toLowerCase().includes(locationName.toLowerCase())
+        );
+  
+        if (matchingPlaces.length > 0) {
+          setFilteredPlaces(matchingPlaces);
+        } else {
+          Alert.alert('No Matches', 'No garbage places found for your current location.');
+        }
+      } else {
+        Alert.alert('Location Error', 'Unable to fetch location details');
+      }
+    }
+  };
+  
+
+  
   const handleSearch = (text: string) => {
     setSearchText(text);
     if (text === '') {
-      setFilteredPlaces(garbagePlaces); // If search is empty, show all places
+      setFilteredPlaces(garbagePlaces); 
     } else {
       const filtered = garbagePlaces.filter((place) =>
         place.address.toLowerCase().includes(text.toLowerCase())
@@ -47,32 +96,32 @@ const UserGarbage = () => {
     }
   };
 
-  
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <Header />
       <ScrollView contentContainerStyle={styles.layout}>
-        <Text style={styles.h1d}>Garbage Places</Text>
+        <Text style={styles.h1d}>Garbage Disposal Places</Text>
         <TextInput
           style={styles.search}
           placeholder="Search for garbage places by address"
           value={searchText}
-          onChangeText={handleSearch} // Filter places based on search input
+          onChangeText={handleSearch} 
         />
-        
 
-       
         
-        <Text style={styles.subd}>Garbage Disposal Places</Text>
+        <TouchableOpacity style={styles.locationBtn} onPress={fetchCurrentLocation}>
+          <Icon name="location-on" size={20} color="#fff" style={styles.iconStyle} />
+          <Text style={styles.locationBtnText}>Use My Location</Text>
+        </TouchableOpacity>
+
         <View style={styles.mainframe}>
           {filteredPlaces.length > 0 ? (
             filteredPlaces.map((place) => (
               <View key={place.id} style={styles.frame}>
-                <Text style={styles.ss1}>{place.locationName}</Text>
                 <Text style={styles.ss2}>{place.address}</Text>
                 <TouchableOpacity
                   style={styles.btn1}
-                  onPress={() => navigation.navigate('PlaceView', { id: place.id })}
+                  onPress={() => navigation.navigate('UserView', { id: place.id })}
                 >
                   <Text style={styles.btntxt1}>View</Text>
                 </TouchableOpacity>
@@ -113,33 +162,31 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 10,
   },
-  btn: {
-    width: '50%',
-    height: 40,
-    backgroundColor: '#4CAF50',
+  locationBtn: {
+    flexDirection: 'row',
+    alignSelf:'center',
+    backgroundColor: '#28A745',
     borderRadius: 10,
+    padding: 10,
+    marginBottom: 20,
     justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginBottom: 20,
+    width:200,
   },
-  btntxt: {
-    fontWeight: '400',
+  locationBtnText: {
+    color: '#fff',
+    fontWeight: '600',
     fontSize: 16,
-    color: '#0E1813',
+    marginLeft: 5, 
   },
-  subd: {
-    fontWeight: '700',
-    fontSize: 22,
-    color: '#141414',
-    marginBottom: 20,
+  iconStyle: {
+    marginRight: 10,
   },
   mainframe: {
     flexGrow: 1,
   },
   frame: {
     width: '100%',
-    height: 132,
+    height: 50,
     backgroundColor: '#C2E0C0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 0 },
@@ -147,8 +194,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     borderRadius: 12,
     padding: 10,
+    marginTop: 2,
     marginBottom: 20,
     justifyContent: 'space-between',
+    flexDirection: 'row',
   },
   btn1: {
     width: 56.95,
@@ -158,6 +207,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
+    marginTop: 5,
   },
   btntxt1: {
     fontWeight: '500',
@@ -172,15 +222,5 @@ const styles = StyleSheet.create({
   ss2: {
     fontWeight: '400',
     fontSize: 16,
-  },
-  reportBtn: {
-    width: '50%',
-    height: 40,
-    backgroundColor: '#4CAF50',
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginBottom: 20,
   },
 });

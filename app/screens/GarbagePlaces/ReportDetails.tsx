@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, SafeAreaView ,Alert,Button,Linking} from 'react-native';
+import { ScrollView, StyleSheet, Text, View, SafeAreaView ,Alert,Button,Linking, TouchableOpacity} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import * as Print from 'expo-print';
 import * as FileSystem from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
+import Header from '../../Components/HeaderAdmin';
 
 const ReportDetails = () => {
   const route = useRoute();
@@ -54,6 +55,7 @@ const ReportDetails = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header/>
       <Text style={styles.title}>Garbage Places Report</Text>
       <ScrollView contentContainerStyle={styles.reportContent}>
         {garbagePlaces.map((place) => (
@@ -72,7 +74,7 @@ const ReportDetails = () => {
           </View>
         ))}
       </ScrollView>
-      <Button title="Download PDF" onPress={generatePDF} />
+      <TouchableOpacity style={styles.rb}  onPress={generatePDF} ><Text style={styles.rbt}>Download PDF</Text></TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -83,16 +85,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#EFF6F0',
-    padding: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
     marginVertical: 20,
+    marginBottom:5,
   },
   reportContent: {
     flexGrow: 1,
+    padding:20,
   },
   reportItem: {
     backgroundColor: '#C2E0C0',
@@ -110,4 +113,17 @@ const styles = StyleSheet.create({
     color: 'black',
     textDecorationLine: 'underline',
   },
+  rb:{
+    width:'40%',
+    height: 50,
+    borderRadius:10,
+    backgroundColor:'#28A745',
+    alignSelf:'center',
+  },
+  rbt:{
+    fontSize:15,
+    color:'#FFFFFF',
+    textAlign:'center',
+    marginTop:10,
+  }
 });

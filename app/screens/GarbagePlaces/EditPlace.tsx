@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Alert, SafeAreaView } from 'react-native';
-import { FIREBASE_DB } from '../../../Firebase_Config'; // Import your Firebase configuration
-import { doc, getDoc, updateDoc } from 'firebase/firestore'; // Import required Firestore methods
+import { FIREBASE_DB } from '../../../Firebase_Config'; 
+import { doc, getDoc, updateDoc } from 'firebase/firestore'; 
 import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
 
 const EditPlace = ({ route, navigation }) => {
   const { id } = route.params; // Get the id from the navigation route params
@@ -51,7 +52,7 @@ const EditPlace = ({ route, navigation }) => {
         phoneNumber,
       });
       Alert.alert('Success', 'Garbage place updated successfully!');
-      navigation.goBack(); // Navigate back to the previous screen
+      navigation.goBack(); 
     } catch (error) {
       Alert.alert('Error', 'Error updating garbage place: ' + error.message);
     }
@@ -59,6 +60,7 @@ const EditPlace = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1}}>
+      <Header/>
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>Edit Location Details</Text>
       <View style={styles.frame}>
@@ -124,6 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 22,
     marginBottom: 20,
+    textAlign:'center',
   },
   label: {
     fontSize: 18,
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
     borderRadius:5,
   },
   btn: {
-    backgroundColor: '#7EB685',
+    backgroundColor: '#28A745',
     padding: 10,
     alignItems: 'center',
     width:'50%',

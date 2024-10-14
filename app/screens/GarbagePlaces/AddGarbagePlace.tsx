@@ -4,11 +4,12 @@ import { FIREBASE_DB } from '../../../Firebase_Config';
 import { addDoc, collection } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 import AdminNav from '../../Components/AdminNav';
+import Header from '../../Components/HeaderAdmin';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList = {
-  HomeG: undefined; // You can define parameters if needed
+  HomeG: undefined; 
 };
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeG'>;
@@ -76,7 +77,7 @@ const AddGarbagePlace = () => {
         setContactPerson('');
         setPhoneNumber('');
         Alert.alert('Success', 'Place added successfully!');
-        navigation.navigate('HomeG'); // Navigate to HomeG after success
+        navigation.navigate('HomeG'); 
       } catch (error) {
         console.error('Error adding place: ', error);
         Alert.alert('Error', 'Failed to add place. Please try again.');
@@ -85,6 +86,7 @@ const AddGarbagePlace = () => {
   
     return (
       <SafeAreaView style={{ flex: 1}}>
+        <Header />
       <ScrollView contentContainerStyle={styles.layoutd}>
         <Text style={styles.header}>Add New Garbage Location</Text>
         <View style={styles.frame}>
@@ -176,7 +178,7 @@ const styles = StyleSheet.create({
     },
 
     button: {
-      backgroundColor: '#7EB685',
+      backgroundColor: '#28A745',
       padding: 10,
       alignItems: 'center',
       width:'50%',
@@ -192,6 +194,7 @@ const styles = StyleSheet.create({
       fontWeight: '700',
       fontSize: 22,
       marginBottom: 20,
+      textAlign:'center',
     },
     frame: {
       width: '98%',

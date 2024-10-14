@@ -19,7 +19,7 @@ const AdminNav: React.FC = () => {
       </TouchableOpacity>
 
 
-      <TouchableOpacity onPress={() => navigation.navigate('HomeG')} style={styles.iconContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('MainGarbage')} style={styles.iconContainer}>
 
 
         <Image source={guideicon} style={styles.icon} />
